@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="KStudentProject.cpp" />
+    <ClCompile Include="KLinkedList.cpp">
+      <Filter>Temp</Filter>
+    </ClCompile>
+    <ClCompile Include="KStudent.cpp">
+      <Filter>Temp</Filter>
+    </ClCompile>
+    <ClCompile Include="KStudentManager.cpp">
+      <Filter>Temp</Filter>
+    </ClCompile>
+    <ClCompile Include="KPrint.cpp">
+      <Filter>Temp</Filter>
+    </ClCompile>
+    <ClCompile Include="KFind.cpp">
+      <Filter>Temp</Filter>
+    </ClCompile>
+    <ClCompile Include="KUpdate.cpp">
+      <Filter>Temp</Filter>
+    </ClCompile>
+    <ClCompile Include="KSort.cpp">
+      <Filter>Temp</Filter>
+    </ClCompile>
+    <ClCompile Include="KInsert.cpp">
+      <Filter>Temp</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="KLinkedList.h" />
+    <ClInclude Include="KStudent.h" />
+    <ClInclude Include="KFileIO.h" />
+    <ClInclude Include="KStudentManager.h" />
+    <ClInclude Include="KPrint.h" />
+    <ClInclude Include="KFind.h" />
+    <ClInclude Include="KUpdate.h" />
+    <ClInclude Include="KSort.h" />
+    <ClInclude Include="KInsert.h" />
+    <ClInclude Include="KFilelO.cpp">
+      <Filter>Temp</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Temp">
+      <UniqueIdentifier>{12a60777-b2cc-4d09-b92a-5525218c19d4}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
