@@ -83,6 +83,7 @@ struct TRect : TFloat2
         rt.Set(pos, fMaxX- fMinX, fMaxY - fMinY);
         return rt;
     }
+   //큰놈이 left 작은게 right
     /*TRect operator - (TPoint& p)
     {
         return TRect(x - p.x, y - p.y);
