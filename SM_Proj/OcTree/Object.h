@@ -7,8 +7,12 @@ class Object
 public:
 	std::wstring mName;
 	Point mPosition;
+	Rect mtRT;
 	virtual void Move(float fSecond) {};
 	virtual void SetTarget(Point& t) {};
+	virtual void SetRect(Point& r, float w, float h) {
+		mtRT.Set(r, w, h);
+	}
 	
 };
 
