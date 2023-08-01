@@ -1,7 +1,7 @@
 #pragma once
 #include "Node.h"
 
-class QuadTree  {
+class Octree {
 public:
     Node* mRootNode = nullptr;
     int miNodeCounter = 0;
@@ -18,12 +18,12 @@ public:
     Node* DyamicAddObject(Object* obj);
     
         
-    ~QuadTree() {
+    ~Octree() {
       
     }
 };
 
-Node* QuadTree::CreateNode(Node* pParent, float x, float y, float fWIdth, float fHeight) {
+Node* Octree::CreateNode(Node* pParent, float x, float y, float fWIdth, float fHeight) {
     Node* pNode = new Node(miNodeCounter++);
     pNode->SetParent(pParent);
     pNode->mRt.Set(x, y, fWIdth, fHeight);
@@ -31,12 +31,12 @@ Node* QuadTree::CreateNode(Node* pParent, float x, float y, float fWIdth, float 
 }
 
 
-void QuadTree::BuildQuadTree(float x, float y, float w, float h) {
+void Octree::BuildQuadTree(float x, float y, float w, float h) {
     mRootNode = CreateNode(nullptr, x, y, w, h);
     BuildTree(mRootNode);
 }
 
-void QuadTree::BuildTree(Node* pNode) {
+void Octree::BuildTree(Node* pNode) {
     if (pNode->mDepth >1) { return; }
 
     Point vTopCenter = { pNode->mRt.mCenterPoint.x, pNode->mRt.mMin.y};
@@ -64,7 +64,7 @@ void QuadTree::BuildTree(Node* pNode) {
         BuildTree(pNode->mChild[i]);
     }
 }
-Node* QuadTree::FindNode(Node* pNode, Object* obj) {
+Node* Octree::FindNode(Node* pNode, Object* obj) {
     if (pNode == nullptr)
         return;
     do {
@@ -79,7 +79,7 @@ Node* QuadTree::FindNode(Node* pNode, Object* obj) {
 
 }
 
-Node* QuadTree::StaticAddObject(Object* obj) {
+Node* Octree::StaticAddObject(Object* obj) {
     Node* pFindNode =  FindNode(mRootNode, obj);
     if (pFindNode != nullptr) {
         pFindNode->mDynamicObjectList.push_back(obj);

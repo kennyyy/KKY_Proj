@@ -19,7 +19,7 @@ public:
 		}
 		return false;
 	}
-	static bool RectToPoint(Rect& rt, Point& p)
+	static bool RectToPoint(Rect& rt, Vector2& p)
 	{
 		if (rt.mMin.x <= p.x && rt.mMax.x >= p.x
 			&&

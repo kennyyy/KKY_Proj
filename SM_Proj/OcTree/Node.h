@@ -5,12 +5,15 @@ class Node {
 public:
     int mIndex = 0;
     int mDepth = 0;
+    Node* mpParent = nullptr;
+    Rect mRt;
     std::vector< Node*> mChild;
     std::vector<Object*> mDynamicObjectList;
     std::vector<Object*> mStaticObjectList;
-    Node* mpParent = nullptr;
-    Rect                   mRt;
+
     void SetParent(Node* pParent) {
+        if (pParent == nullptr)
+            return;
         mpParent = pParent;
         mDepth = pParent->mDepth + 1;
     }
@@ -23,6 +26,7 @@ public:
         }
     }
 };
+
 
 
 

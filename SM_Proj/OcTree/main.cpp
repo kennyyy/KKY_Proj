@@ -1,4 +1,4 @@
-﻿#include "QuadTree.h"
+﻿#include "Octree.h"
 
 int main()
 {

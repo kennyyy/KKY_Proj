@@ -2,52 +2,52 @@
 #include "Collision.h"
 
 
-class Object
+class Object2D
 {
 public:
 	std::wstring mName;
-	Point mPosition;
+	Vector2 mPosition;
 	Rect mtRT;
 	virtual void Move(float fSecond) {};
-	virtual void SetTarget(Point& t) {};
-	virtual void SetRect(Point& r, float w, float h) {
+	virtual void SetTarget(Vector2& t) {};
+	virtual void SetRect(Vector2& r, float w, float h) {
 		mtRT.Set(r, w, h);
 	}
 	
 };
 
-class StaticObject : public Object {
+class StaticObject2D : public Object2D {
 public:
 	void Move(float fSecond) {};
 };
 
 
-class DynamicObject : public Object {
+class DynamicObject2D : public Object2D {
 public:
 	float mfSpeed = 100.0f;
-	Point mDirection;
-	Point mTarget;
+	Vector2 mDirection;
+	Vector2 mTarget;
 public:
 	void Move(float fSecond);
-	void SetTarget(Point& t);
+	void SetTarget(Vector2& t);
 
 public:
-	DynamicObject() {
+	DynamicObject2D() {
 		mDirection.x = 0.0f;
 		mDirection.y = 0.0f;
 	}
 
 };
 
-void DynamicObject::SetTarget(Point& t) {
+void DynamicObject2D::SetTarget(Vector2& t) {
 	mTarget = t;
 	mDirection = t - mPosition;
 	float fDistance = mDirection.GetDistance();
 	mDirection /= fDistance;
 }
 
-void  DynamicObject::Move(float fSecond) {
-	Point vVelocity = mDirection * mfSpeed * fSecond;
+void  DynamicObject2D::Move(float fSecond) {
+	Vector2 vVelocity = mDirection * mfSpeed * fSecond;
 	mPosition = mPosition + vVelocity;
 
 	//충돌시 방향 전환
@@ -57,4 +57,9 @@ void  DynamicObject::Move(float fSecond) {
 	}
 }
 
+class Object3D {
+	int mNodeIndex = -1;
+	std::wstring mName;
+
+};
 

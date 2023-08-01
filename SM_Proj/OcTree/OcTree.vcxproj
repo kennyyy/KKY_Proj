@@ -141,16 +141,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Math.cpp" />
     <ClCompile Include="Node.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="QuadTree.cpp" />
+    <ClCompile Include="Octree.cpp" />
     <ClCompile Include="Timer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Collision.h" />
+    <ClInclude Include="Math.h" />
     <ClInclude Include="Node.h" />
     <ClInclude Include="Object.h" />
-    <ClInclude Include="QuadTree.h" />
+    <ClInclude Include="Octree.h" />
     <ClInclude Include="Timer.h" />
     <ClInclude Include="Utils.h" />
   </ItemGroup>
