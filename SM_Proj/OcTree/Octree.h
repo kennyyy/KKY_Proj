@@ -1,62 +1,84 @@
 #pragma once
 #include "Node.h"
 
+
 class Octree {
 public:
     Node* mRootNode = nullptr;
     int miNodeCounter = 0;
-    Rect mRt;
     std::set<Node*> mDynamicObjectNodeList;
     std::vector<Node*> mNodeArrayList;
 
-    void BuildQuadTree(float x, float y, float w, float h);
+    //공간분할
+    void BuildOctree(float x, float y, float z,  float w, float h, float d);
     void BuildTree(Node* pParent);
-    Node* CreateNode(Node* pNode, float x, float y, float fWIdth, float fHeight);
+    Node* CreateNode(Node* pParent, float x, float y, float z, float fWIdth, float fHeight, float fDepth);
 
+    //오브젝트 생성
     Node* FindNode(Node* pNode, Object* obj);
     Node* StaticAddObject(Object* obj);
     Node* DyamicAddObject(Object* obj);
     
-        
-    ~Octree() {
-      
-    }
+    virtual ~Octree() {}
 };
 
-Node* Octree::CreateNode(Node* pParent, float x, float y, float fWIdth, float fHeight) {
+void Octree::BuildOctree(float x, float y, float z, float w, float h, float d) {
+    mRootNode = CreateNode(nullptr, x, y, z, w, h, d);
+    BuildTree(mRootNode);
+}
+
+Node* Octree::CreateNode(Node* pParent, float x, float y, float z, float fWIdth, float fHeight, float fDepth) {
     Node* pNode = new Node(miNodeCounter++);
     pNode->SetParent(pParent);
-    pNode->mRt.Set(x, y, fWIdth, fHeight);
+    pNode->mbx.Set(x, y, z, fWIdth, fHeight, fDepth);
     return pNode;
 }
 
 
-void Octree::BuildQuadTree(float x, float y, float w, float h) {
-    mRootNode = CreateNode(nullptr, x, y, w, h);
-    BuildTree(mRootNode);
-}
-
 void Octree::BuildTree(Node* pNode) {
-    if (pNode->mDepth >1) { return; }
+    if (pNode->mDepth >1)  return;
 
-    Point vTopCenter = { pNode->mRt.mCenterPoint.x, pNode->mRt.mMin.y};
-    Point vBottomCenter = { pNode->mRt.mCenterPoint.x, pNode->mRt.mMax.y};
-    Point vLeftCenter = { pNode->mRt.mMin.x, pNode->mRt.mCenterPoint.y };
-    Point vRightCenter = {pNode->mRt.mMax.x, pNode->mRt.mCenterPoint.y };
+    Vector3 vHalf = pNode->mbx.mHalf;
+    vHalf = vHalf * 0.5f;
 
-    Node* pNewNode = CreateNode(pNode, mRt.mMin.x, mRt.mMin.y, pNode->mRt.mCenterPoint.x, pNode->mRt.mCenterPoint.y);
+    Node* pNewNode = CreateNode(pNode, pNode->mbx.mCenterPoint.x - vHalf.x , pNode->mbx.mCenterPoint.y + vHalf.y, pNode->mbx.mCenterPoint.z - vHalf.z,
+                                                   pNode->mbx.mHalf.x, pNode->mbx.mHalf.y, pNode->mbx.mHalf.z );
     pNode->mChild.push_back(pNewNode);
     mNodeArrayList.push_back(pNode);
 
-    pNewNode = CreateNode(pNode, vTopCenter.x, vTopCenter.y, pNode->mRt.mHalf.x, pNode->mRt.mHalf.y);
+    Node* pNewNode = CreateNode(pNode, pNode->mbx.mCenterPoint.x + vHalf.x, pNode->mbx.mCenterPoint.y + vHalf.y, pNode->mbx.mCenterPoint.z - vHalf.z,
+        pNode->mbx.mHalf.x, pNode->mbx.mHalf.y, pNode->mbx.mHalf.z);
     pNode->mChild.push_back(pNewNode);
     mNodeArrayList.push_back(pNode);
 
-    pNewNode = CreateNode(pNode, mRt.mCenterPoint.x, mRt.mCenterPoint.y, pNode->mRt.mHalf.x, pNode->mRt.mHalf.y);
+    Node* pNewNode = CreateNode(pNode, pNode->mbx.mCenterPoint.x + vHalf.x, pNode->mbx.mCenterPoint.y - vHalf.y, pNode->mbx.mCenterPoint.z - vHalf.z,
+        pNode->mbx.mHalf.x, pNode->mbx.mHalf.y, pNode->mbx.mHalf.z);
     pNode->mChild.push_back(pNewNode);
     mNodeArrayList.push_back(pNode);
 
-    pNewNode = CreateNode(pNode, vLeftCenter.x, vLeftCenter.y, pNode->mRt.mHalf.x, pNode->mRt.mHalf.y);
+    Node* pNewNode = CreateNode(pNode, pNode->mbx.mCenterPoint.x - vHalf.x, pNode->mbx.mCenterPoint.y - vHalf.y, pNode->mbx.mCenterPoint.z - vHalf.z,
+        pNode->mbx.mHalf.x, pNode->mbx.mHalf.y, pNode->mbx.mHalf.z);
+    pNode->mChild.push_back(pNewNode);
+    mNodeArrayList.push_back(pNode);
+
+    //
+    Node* pNewNode = CreateNode(pNode, pNode->mbx.mCenterPoint.x - vHalf.x, pNode->mbx.mCenterPoint.y + vHalf.y, pNode->mbx.mCenterPoint.z + vHalf.z,
+        pNode->mbx.mHalf.x, pNode->mbx.mHalf.y, pNode->mbx.mHalf.z);
+    pNode->mChild.push_back(pNewNode);
+    mNodeArrayList.push_back(pNode);
+
+    Node* pNewNode = CreateNode(pNode, pNode->mbx.mCenterPoint.x + vHalf.x, pNode->mbx.mCenterPoint.y + vHalf.y, pNode->mbx.mCenterPoint.z + vHalf.z,
+        pNode->mbx.mHalf.x, pNode->mbx.mHalf.y, pNode->mbx.mHalf.z);
+    pNode->mChild.push_back(pNewNode);
+    mNodeArrayList.push_back(pNode);
+
+    Node* pNewNode = CreateNode(pNode, pNode->mbx.mCenterPoint.x + vHalf.x, pNode->mbx.mCenterPoint.y - vHalf.y, pNode->mbx.mCenterPoint.z + vHalf.z,
+        pNode->mbx.mHalf.x, pNode->mbx.mHalf.y, pNode->mbx.mHalf.z);
+    pNode->mChild.push_back(pNewNode);
+    mNodeArrayList.push_back(pNode);
+
+    Node* pNewNode = CreateNode(pNode, pNode->mbx.mCenterPoint.x - vHalf.x, pNode->mbx.mCenterPoint.y - vHalf.y, pNode->mbx.mCenterPoint.z + vHalf.z,
+        pNode->mbx.mHalf.x, pNode->mbx.mHalf.y, pNode->mbx.mHalf.z);
     pNode->mChild.push_back(pNewNode);
     mNodeArrayList.push_back(pNode);
 
@@ -64,13 +86,16 @@ void Octree::BuildTree(Node* pNode) {
         BuildTree(pNode->mChild[i]);
     }
 }
+
+
+
 Node* Octree::FindNode(Node* pNode, Object* obj) {
     if (pNode == nullptr)
         return;
     do {
         for (int i = 0; pNode->mChild.size(); i++) {
             if (pNode->mChild[i] != nullptr) {
-                if(Collision::RectToRect(pNode->mChild[i]->mRt, obj->mtRT)){}
+                if(Collision::RectToRect(pNode->mChild[i]->mRt, obj->mbx)){}
             }
         }
 
@@ -82,9 +107,19 @@ Node* Octree::FindNode(Node* pNode, Object* obj) {
 Node* Octree::StaticAddObject(Object* obj) {
     Node* pFindNode =  FindNode(mRootNode, obj);
     if (pFindNode != nullptr) {
-        pFindNode->mDynamicObjectList.push_back(obj);
-        mDynamicObjectNodeList.insert(pFindNode);
+        pFindNode->mStaticObjectList.push_back(obj);
         return pFindNode;
     }
+    return nullptr;
+}
+
+Node* Octree::DyamicAddObject(Object* obj) {
+    Node* pFindNode = FindNode(mRootNode, obj);
+
+    if (pFindNode != nullptr) {
+        pFindNode->mDynamicObjectList.push_back(obj);
+        mDynamicObjectNodeList.insert(pFindNode);
+    }
+
     return nullptr;
 }

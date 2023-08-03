@@ -60,6 +60,9 @@ public:
 	Vector3 operator * (float Value);
 	Vector3 operator / (float Value);
 	Vector3& operator /= (float Value);
+	static float Length(Vector3& p);
+	float Length();
+
 	Vector3();
 	Vector3(float fx, float fy, float fz);
 };

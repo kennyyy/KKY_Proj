@@ -6,7 +6,7 @@ public:
     int mIndex = 0;
     int mDepth = 0;
     Node* mpParent = nullptr;
-    Rect mRt;
+    Box mbx;
     std::vector< Node*> mChild;
     std::vector<Object*> mDynamicObjectList;
     std::vector<Object*> mStaticObjectList;
@@ -25,6 +25,13 @@ public:
             delete mChild[i];
         }
     }
+};
+
+struct SpaceData {
+    Vector3 v3;
+    float w;
+    float h;
+    float d;
 };
 
 

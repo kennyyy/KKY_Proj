@@ -82,6 +82,15 @@ Vector3& Vector3::operator /= (float Value) {
 	return *this;
 }
 
+float Vector3::Length() {
+	float fDistance = sqrt(x * x + y * y + z * z);
+	return fDistance;
+}
+static float Length(Vector3& p) {
+	float fDistance = sqrt(p.x * p.x + p.y * p.y + p.z * p.z);
+	return fDistance;
+}
+
 Vector3::Vector3() {}
 Vector3::Vector3(float fx, float fy, float fz) {
 	x = fx;
