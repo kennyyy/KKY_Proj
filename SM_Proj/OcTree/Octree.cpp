@@ -37,10 +37,10 @@ bool Octree::PreFrame() {
 	return true;
 }
 bool Octree::Frame() {
-
+	return true;
 }
 bool Octree::PostFrame() {
-
+	return true;
 }
 bool Octree::Render(Node* pNode) {
 	if (pNode == nullptr)
@@ -73,7 +73,8 @@ bool Octree::Render(Node* pNode) {
 		mQueue.pop();
 		PreOrder(pNode);
 	}
+	return true;
 }
 bool Octree::Release() {
-
+	return true;
 }
