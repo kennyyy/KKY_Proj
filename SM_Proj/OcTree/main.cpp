@@ -68,7 +68,7 @@ int main()
 		octree.Frame();//x
 		octree.Render(octree.mRootNode);//LevelOrder 방식 순회 출력
 		timer.Render();//시간출력
-		Sleep(100);
+		Sleep(1);
 		
 	}
 	timer.Release();//x

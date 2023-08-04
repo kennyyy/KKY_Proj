@@ -10,10 +10,10 @@ bool Timer::Init() {
 
 int Timer::GetFPS() {
 	static int FPS = 0;
-	if (mfSecondPerFrame >= 1.0f) {
+	if (mfFramePerSecond >= 1.0f) {
 		miFPS = FPS;
 		FPS = 0;
-		mfSecondPerFrame -= 1.0f;
+		mfFramePerSecond -= 1.0f;
 	}
 	FPS++;
 	return miFPS;
@@ -23,8 +23,9 @@ bool Timer::Frame() {
 	DWORD dwCurrnetTime = timeGetTime();
 	DWORD dwElapseTime = dwCurrnetTime - mdwBeforeTime;
 	mfSecondPerFrame = dwElapseTime / 1000.0f;
-	mdwBeforeTime = dwCurrnetTime;
 	mfGameTimer += mfSecondPerFrame;
+	mdwBeforeTime = dwCurrnetTime;
+	mfFramePerSecond += mfSecondPerFrame;
 	return true;
 }
 

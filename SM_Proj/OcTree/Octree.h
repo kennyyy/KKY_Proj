@@ -29,7 +29,7 @@ public:
     bool PreFrame();
     bool Frame();
     bool PostFrame();
-    bool Render(Node* pNode);
+    void Render(Node* pNode);
     bool Release();
 
     Octree() {}

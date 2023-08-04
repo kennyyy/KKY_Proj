@@ -42,7 +42,7 @@ bool Octree::Frame() {
 bool Octree::PostFrame() {
 	return true;
 }
-bool Octree::Render(Node* pNode) {
+void Octree::Render(Node* pNode) {
 	if (pNode == nullptr)
 		return;
 	std::wcout << L"[" << pNode->mDepth << L"]"
@@ -69,11 +69,10 @@ bool Octree::Render(Node* pNode) {
 		}
 	}
 	if (mQueue.empty()) {
-		pNode = mQueue.front();
+		Node* pNode = mQueue.front();
 		mQueue.pop();
 		PreOrder(pNode);
 	}
-	return true;
 }
 bool Octree::Release() {
 	return true;
