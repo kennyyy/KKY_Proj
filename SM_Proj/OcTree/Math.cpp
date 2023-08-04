@@ -1,4 +1,6 @@
 #include "Math.h"
+
+//vertor2
 bool Vector2::operator == (Vector2& vertex) {
 	if (fabs(x - vertex.x) < _EPSILON)
 		if (fabs(y - vertex.y) < _EPSILON)
@@ -36,15 +38,9 @@ float Vector2::Length(Vector2& p)
 	float fDistance = sqrt(p.x * p.x + p.y * p.y);
 	return fDistance;
 }
-//float Vector2::Length();
-//static float Vector2::Length(Vector2& p);
-Vector2::Vector2() {}
-Vector2::Vector2(float fx, float fy) {
-	x = fx;
-	y = fy;
-}
 
 
+//vertor3
 float Vector3::operator  | (Vector3& vertex) {
 	return (x * vertex.x + y * vertex.y + z * vertex.z);
 }
@@ -81,7 +77,6 @@ Vector3& Vector3::operator /= (float Value) {
 	z = z / Value;
 	return *this;
 }
-
 float Vector3::Length() {
 	float fDistance = sqrt(x * x + y * y + z * z);
 	return fDistance;
@@ -91,9 +86,3 @@ static float Length(Vector3& p) {
 	return fDistance;
 }
 
-Vector3::Vector3() {}
-Vector3::Vector3(float fx, float fy, float fz) {
-	x = fx;
-	y = fy;
-	z = fz;
-}

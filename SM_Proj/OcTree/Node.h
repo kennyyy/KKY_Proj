@@ -27,13 +27,6 @@ public:
     }
 };
 
-struct SpaceData {
-    Vector3 v3;
-    float w;
-    float h;
-    float d;
-};
-
 
 
 

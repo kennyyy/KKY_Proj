@@ -1,13 +1,30 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="Node.cpp" />
-    <ClCompile Include="Octree.cpp" />
-    <ClCompile Include="Timer.cpp" />
     <ClCompile Include="main.cpp">
       <Filter>메인 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Math.cpp" />
+    <ClCompile Include="Math.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Node.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Object.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Octree.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Timer.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Utils.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="OctreeCreateWorks.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Collision.h">
@@ -35,6 +52,9 @@
   <ItemGroup>
     <Filter Include="헤더 파일">
       <UniqueIdentifier>{ee9ebcd4-0acd-4fc9-be92-47ec4b75c738}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일">
+      <UniqueIdentifier>{a36a4af5-3024-4b4c-a2a8-427b660c5f41}</UniqueIdentifier>
     </Filter>
     <Filter Include="메인 파일">
       <UniqueIdentifier>{ff55fd53-29c3-465b-a0a3-45ae9fe67e4c}</UniqueIdentifier>
