@@ -3,6 +3,7 @@
 #include <vector>
 #include <queue>
 #include <set>
+#include <time.h>
 #include <windows.h>
 #include <string>
 
@@ -40,8 +41,10 @@ public:
 	Vector2 operator * (float Value);
 	Vector2 operator / (float Value);
 	Vector2& operator /= (float Value);
+
 	float Length();
 	static float Length(Vector2& p);
+
 	Vector2() {}
 	Vector2(float fx, float fy) {
 		x = fx;
@@ -51,8 +54,8 @@ public:
 
 class Vector3 : public Float3 {
 public:
-	float operator  | (Vector3& vertex);
-	Vector3 operator ^ (Vector3& vertex);
+	/*float operator  | (Vector3& vertex);
+	Vector3 operator ^ (Vector3& vertex);*/
 	bool operator == (Vector3& vertex);
 	bool operator != (Vector3 vertex);
 	Vector3 operator + (Vector3& vertex);
@@ -60,6 +63,7 @@ public:
 	Vector3 operator * (float Value);
 	Vector3 operator / (float Value);
 	Vector3& operator /= (float Value);
+
 	static float Length(Vector3& p);
 	float Length();
 
@@ -68,10 +72,9 @@ public:
 		x = fx;
 		y = fy;
 		z = fz;
-	}
+ 	}
 };
 
-class Math
-{
+class Math{
 };
 

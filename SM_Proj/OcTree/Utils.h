@@ -20,38 +20,15 @@ struct Rect {
 	Rect operator * (float fValue);
 	Rect operator / (float fValue);
 
-	void Set(float x, float y, float fw, float fh) {
-		v = { x, y };
-		s = { fw, fh };
+	void Set(float x, float y, float fw, float fh);
+	void Set(Vector2 vertex, float fw, float fh);
+	void Set(float fw, float fh);
 
-		Set(fw, fh);
-
-	}
-	void Set(Vector2 vertex, float fw, float fh)
-	{
-		v = { vertex.x, vertex.y };
-		s = { fw, fh };
-		Set(fw, fh);
-	}
-	void Set(float fw, float fh)
-	{
-		mfWidth = fw;
-		mfHeight = fh;
-		mHalf = { mfWidth * 0.5f,mfHeight * 0.5f };
-		mPoint[0] = { v.x, v.y };
-		mPoint[1] = { v.x + mfWidth, v.y };
-		mPoint[2] = { v.x + mfWidth, v.y + mfHeight };
-		mPoint[3] = { v.x, v.y + mfHeight };
-		mCenterPoint = (mPoint[0] + mPoint[2]) * 0.5f;
-		mMin = mPoint[0];
-		mMax = mPoint[2];
-	}
 	Rect() {}
 	Rect(float x, float y, float fw, float fh) {
 		Set(x, y, fw, fh);
 	}
 };
-
 
 class Box {
 public:
@@ -74,45 +51,15 @@ public:
 	Box operator * (float fValue);
 	Box operator / (float fValue);
 
+	void Set(float x, float y, float z, float fw, float fh, float fd);
+	void Set(Vector3 vertex, float fw, float fh, float fd);
+	void Set(float fw, float fh, float fd);
+
 	Box() {}
 	Box(float x, float y, float z, float fw, float fh, float fd) {
 		Set(x, y, z, fw, fh, fd);
 	}
-
-	void Set(float x, float y, float z, float fw, float fh, float fd) {
-		v = { x, y , z };
-		s = { fw, fh, fd };
-		Set(fw, fh, fd);
-	}
-	void Set(Vector3 vertex, float fw, float fh, float fd){
-		v = vertex;
-		s = { fw, fh, fd };
-		Set(fw, fh,fd);
-	}
-
-	void Set(float fw, float fh, float fd){
-		mfWidth = fw;
-		mfHeight = fh;
-		mfDepth = fd;
-		mHalf = { mfWidth * 0.5f,mfHeight * 0.5f, mfDepth *0.5f};
-		mPoint[0] = { v.x- mHalf.x, v.y + mHalf.y , v.z - mHalf.z };
-		mPoint[1] = { v.x , v.y+ mHalf.y , v.z- mHalf.z};
-		mPoint[2] = { v.x , v.y , v.z - mHalf.z };
-		mPoint[3] = { v.x- mHalf.x , v.y , v.z - mHalf.z };
-
-		mPoint[4] = { v.x - mHalf.x, v.y + mHalf.y , v.z + mHalf.z };
-		mPoint[5] = { v.x , v.y + mHalf.y , v.z + mHalf.z };
-		mPoint[6] = { v.x , v.y , v.z + mHalf.z };
-		mPoint[7] = { v.x - mHalf.x , v.y , v.z + mHalf.z };
-		
-		mMin = mPoint[0];
-		mMax = mPoint[6];
-		mCenterPoint = (mMin + mMax) * 0.5f;
-	}
 };
-
-
-
 
 class Utils
 {

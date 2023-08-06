@@ -1,6 +1,32 @@
 #include "Collision.h"
 
 //Rect
+void Rect::Set(float x, float y, float fw, float fh) {
+	v = { x, y };
+	s = { fw, fh };
+
+	Set(fw, fh);
+
+}
+void Rect::Set(Vector2 vertex, float fw, float fh)
+{
+	v = { vertex.x, vertex.y };
+	s = { fw, fh };
+	Set(fw, fh);
+}
+void Rect::Set(float fw, float fh)
+{
+	mfWidth = fw;
+	mfHeight = fh;
+	mHalf = { mfWidth * 0.5f,mfHeight * 0.5f };
+	mPoint[0] = { v.x, v.y };
+	mPoint[1] = { v.x + mfWidth, v.y };
+	mPoint[2] = { v.x + mfWidth, v.y + mfHeight };
+	mPoint[3] = { v.x, v.y + mfHeight };
+	mCenterPoint = (mPoint[0] + mPoint[2]) * 0.5f;
+	mMin = mPoint[0];
+	mMax = mPoint[2];
+}
 bool Rect::operator == (Rect& rt) {
 	if (fabs(v.x - rt.v.x) < _EPSILON)
 		if (fabs(v.y - rt.v.y) < _EPSILON)
@@ -53,6 +79,37 @@ Rect Rect::operator / (float fValue) {
 }
 
 //Box
+
+void Box::Set(float x, float y, float z, float fw, float fh, float fd) {
+	v = { x, y , z };
+	s = { fw, fh, fd };
+	Set(fw, fh, fd);
+}
+void Box::Set(Vector3 vertex, float fw, float fh, float fd) {
+	v = vertex;
+	s = { fw, fh, fd };
+	Set(fw, fh, fd);
+}
+
+void Box::Set(float fw, float fh, float fd) {
+	mfWidth = fw;
+	mfHeight = fh;
+	mfDepth = fd;
+	mHalf = { mfWidth * 0.5f,mfHeight * 0.5f, mfDepth * 0.5f };
+	mPoint[0] = { v.x - mHalf.x, v.y + mHalf.y , v.z - mHalf.z };
+	mPoint[1] = { v.x + mHalf.x, v.y + mHalf.y , v.z - mHalf.z };
+	mPoint[2] = { v.x + mHalf.x, v.y - mHalf.y , v.z - mHalf.z };
+	mPoint[3] = { v.x - mHalf.x ,v.y - mHalf.y , v.z - mHalf.z };
+
+	mPoint[4] = { v.x - mHalf.x, v.y + mHalf.y , v.z + mHalf.z };
+	mPoint[5] = { v.x + mHalf.x, v.y + mHalf.y  , v.z + mHalf.z };
+	mPoint[6] = { v.x + mHalf.x, v.y - mHalf.y  , v.z + mHalf.z };
+	mPoint[7] = { v.x - mHalf.x ,v.y - mHalf.y , v.z + mHalf.z };
+
+	mMin = mPoint[3];
+	mMax = mPoint[5];
+	mCenterPoint = (mMin + mMax) * 0.5f;
+}
 
 bool Box::operator == (Box& bx) {
 	if (fabs(v.x - bx.v.x) < _EPSILON)

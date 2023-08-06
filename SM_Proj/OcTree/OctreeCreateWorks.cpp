@@ -13,49 +13,73 @@ Node* Octree::CreateNode(Node* pParent, float x, float y, float z, float fWIdth,
 }
 
 void Octree::BuildTree(Node* pNode) {
-    if (pNode->mDepth > 1)  return;
+    if (pNode->mDepth > 0)  return;
 
     Vector3 vHalf = pNode->mbx.mHalf;
     vHalf = vHalf * 0.5f;
 
     //0~3
-    Node* pNewNode = CreateNode(pNode, pNode->mbx.mCenterPoint.x - vHalf.x, pNode->mbx.mCenterPoint.y + vHalf.y, pNode->mbx.mCenterPoint.z - vHalf.z,
+    Node* pNewNode = CreateNode(pNode,
+        pNode->mbx.mCenterPoint.x - vHalf.x, 
+        pNode->mbx.mCenterPoint.y + vHalf.y,
+        pNode->mbx.mCenterPoint.z - vHalf.z,
+        pNode->mbx.mHalf.x, pNode->mbx.mHalf.y, pNode->mbx.mHalf.z);
+    pNode->mChild.push_back(pNewNode);
+    mQctNodeList.push_back(pNode);
+        
+    pNewNode = CreateNode(pNode, 
+        pNode->mbx.mCenterPoint.x + vHalf.x,
+        pNode->mbx.mCenterPoint.y + vHalf.y,
+        pNode->mbx.mCenterPoint.z - vHalf.z,
         pNode->mbx.mHalf.x, pNode->mbx.mHalf.y, pNode->mbx.mHalf.z);
     pNode->mChild.push_back(pNewNode);
     mQctNodeList.push_back(pNode);
 
-    pNewNode = CreateNode(pNode, pNode->mbx.mCenterPoint.x + vHalf.x, pNode->mbx.mCenterPoint.y + vHalf.y, pNode->mbx.mCenterPoint.z - vHalf.z,
+    pNewNode = CreateNode(pNode,
+        pNode->mbx.mCenterPoint.x + vHalf.x, 
+        pNode->mbx.mCenterPoint.y - vHalf.y,
+        pNode->mbx.mCenterPoint.z - vHalf.z,
         pNode->mbx.mHalf.x, pNode->mbx.mHalf.y, pNode->mbx.mHalf.z);
     pNode->mChild.push_back(pNewNode);
     mQctNodeList.push_back(pNode);
 
-    pNewNode = CreateNode(pNode, pNode->mbx.mCenterPoint.x + vHalf.x, pNode->mbx.mCenterPoint.y - vHalf.y, pNode->mbx.mCenterPoint.z - vHalf.z,
-        pNode->mbx.mHalf.x, pNode->mbx.mHalf.y, pNode->mbx.mHalf.z);
-    pNode->mChild.push_back(pNewNode);
-    mQctNodeList.push_back(pNode);
-
-    pNewNode = CreateNode(pNode, pNode->mbx.mCenterPoint.x - vHalf.x, pNode->mbx.mCenterPoint.y - vHalf.y, pNode->mbx.mCenterPoint.z - vHalf.z,
+    pNewNode = CreateNode(pNode,
+        pNode->mbx.mCenterPoint.x - vHalf.x,
+        pNode->mbx.mCenterPoint.y - vHalf.y,
+        pNode->mbx.mCenterPoint.z - vHalf.z,
         pNode->mbx.mHalf.x, pNode->mbx.mHalf.y, pNode->mbx.mHalf.z);
     pNode->mChild.push_back(pNewNode);
     mQctNodeList.push_back(pNode);
 
     //4~7
-    pNewNode = CreateNode(pNode, pNode->mbx.mCenterPoint.x - vHalf.x, pNode->mbx.mCenterPoint.y + vHalf.y, pNode->mbx.mCenterPoint.z + vHalf.z,
+    pNewNode = CreateNode(pNode,
+        pNode->mbx.mCenterPoint.x - vHalf.x, 
+        pNode->mbx.mCenterPoint.y + vHalf.y, 
+        pNode->mbx.mCenterPoint.z + vHalf.z,
         pNode->mbx.mHalf.x, pNode->mbx.mHalf.y, pNode->mbx.mHalf.z);
     pNode->mChild.push_back(pNewNode);
     mQctNodeList.push_back(pNode);
 
-   pNewNode = CreateNode(pNode, pNode->mbx.mCenterPoint.x + vHalf.x, pNode->mbx.mCenterPoint.y + vHalf.y, pNode->mbx.mCenterPoint.z + vHalf.z,
+    pNewNode = CreateNode(pNode,
+        pNode->mbx.mCenterPoint.x + vHalf.x,
+        pNode->mbx.mCenterPoint.y + vHalf.y,
+        pNode->mbx.mCenterPoint.z + vHalf.z,
         pNode->mbx.mHalf.x, pNode->mbx.mHalf.y, pNode->mbx.mHalf.z);
     pNode->mChild.push_back(pNewNode);
     mQctNodeList.push_back(pNode);
 
-   pNewNode = CreateNode(pNode, pNode->mbx.mCenterPoint.x + vHalf.x, pNode->mbx.mCenterPoint.y - vHalf.y, pNode->mbx.mCenterPoint.z + vHalf.z,
+    pNewNode = CreateNode(pNode, 
+        pNode->mbx.mCenterPoint.x + vHalf.x, 
+        pNode->mbx.mCenterPoint.y - vHalf.y,
+        pNode->mbx.mCenterPoint.z + vHalf.z,
         pNode->mbx.mHalf.x, pNode->mbx.mHalf.y, pNode->mbx.mHalf.z);
     pNode->mChild.push_back(pNewNode);
     mQctNodeList.push_back(pNode);
 
-    pNewNode = CreateNode(pNode, pNode->mbx.mCenterPoint.x - vHalf.x, pNode->mbx.mCenterPoint.y - vHalf.y, pNode->mbx.mCenterPoint.z + vHalf.z,
+    pNewNode = CreateNode(pNode,
+        pNode->mbx.mCenterPoint.x - vHalf.x, 
+        pNode->mbx.mCenterPoint.y - vHalf.y, 
+        pNode->mbx.mCenterPoint.z + vHalf.z,
         pNode->mbx.mHalf.x, pNode->mbx.mHalf.y, pNode->mbx.mHalf.z);
     pNode->mChild.push_back(pNewNode);
     mQctNodeList.push_back(pNode);
@@ -100,6 +124,7 @@ Node* Octree::DyamicAddObject(Object* obj) {
     if (pFindNode != nullptr) {
         pFindNode->mDynamicObjectList.push_back(obj);
         mDynamicObjectNodeList.insert(pFindNode);
+        return pFindNode;
     }
 
     return nullptr;

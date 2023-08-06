@@ -5,14 +5,14 @@
 class Timer
 {
 public:
-	float mfGameTimer;
-	float mfSecondPerFrame;
+	float mfGameTimer; //게임시간
+	float mfSecondPerFrame; 
 	float mfFramePerSecond;
-	DWORD mdwBeforeTime;
+	DWORD mdwBeforeTime; //이전시간 저장
 	int miFPS = 0;
-public:
+
 	int GetFPS();
-public:
+
 	bool Init();
 	bool Frame();
 	bool Render();

@@ -7,19 +7,13 @@ public:
     int mDepth = 0;
     Node* mpParent = nullptr;
     Box mbx;
-    std::vector< Node*> mChild;
-    std::vector<Object*> mDynamicObjectList;
-    std::vector<Object*> mStaticObjectList;
+    std::vector< Node*> mChild; 
+    std::vector<Object*> mDynamicObjectList;//노드영역 안에 있는 동적오브젝트 리스트
+    std::vector<Object*> mStaticObjectList;//노드영역 안에 있는 정적오브젝트 리스트
 
-    void SetParent(Node* pParent) {
-        if (pParent == nullptr)
-            return;
-        mpParent = pParent;
-        mDepth = pParent->mDepth + 1;
-    }
-
+    void SetParent(Node* pParent);
+  
     Node(int id) : mIndex(id) {}
-
     virtual ~Node() {
         for (int i = 0; i < mChild.size(); i++) {
             delete mChild[i];

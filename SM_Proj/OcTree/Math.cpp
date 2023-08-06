@@ -40,15 +40,18 @@ float Vector2::Length(Vector2& p)
 }
 
 
+
+//float Vector3::operator  | (Vector3& vertex) {
+//	return (x * vertex.x + y * vertex.y + z * vertex.z);
+//}
+//Vector3 Vector3::operator ^ (Vector3& vertex) {
+//	return Vector3(y * vertex.z - z * vertex.y,
+//		z * vertex.x - x * vertex.z,
+//		x * vertex.y - y * vertex.x);
+//}
+
+
 //vertor3
-float Vector3::operator  | (Vector3& vertex) {
-	return (x * vertex.x + y * vertex.y + z * vertex.z);
-}
-Vector3 Vector3::operator ^ (Vector3& vertex) {
-	return Vector3(y * vertex.z - z * vertex.y,
-		z * vertex.x - x * vertex.z,
-		x * vertex.y - y * vertex.x);
-}
 bool Vector3::operator == (Vector3& vertex) {
 	if (fabs(x - vertex.x) > _EPSILON)
 		if (fabs(y - vertex.y) > _EPSILON)

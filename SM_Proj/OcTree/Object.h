@@ -3,21 +3,15 @@
 
 const float gfMapSize = 1000.0f;
 
-class Object
-{
+class Object{
 public:
 	std::wstring mName;
 	Vector3 mPosition;
 	Box  mbx;
+
 	virtual void Move(float fSecond) {};
 	virtual void SetTarget(Vector3& t) {};
 	virtual void SetBox(Vector3& vertex, float w, float h, float d);
-	
-};
-
-class StaticObject : public Object {
-public:
-	void Move(float fSecond) {};
 };
 
 class DynamicObject : public Object {
@@ -25,7 +19,7 @@ public:
 	float mfSpeed = 100.0f;
 	Vector3 mDirection;
 	Vector3 mTarget;
-public:
+
 	void Move(float fSecond);
 	void SetTarget(Vector3& t);
 
@@ -35,7 +29,9 @@ public:
 		mDirection.y = 0.0f;
 		mDirection.z = 0.0f;
 	}
+};
 
+class StaticObject : public Object {
 };
 
 

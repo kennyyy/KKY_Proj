@@ -6,9 +6,9 @@ class Octree {
 public:
     Node* mRootNode = nullptr;
     int miNodeCounter = 0;
-    std::queue<Node*> mQueue;
-    std::set<Node*> mDynamicObjectNodeList;
-    std::vector<Node*> mQctNodeList;
+    std::queue<Node*> mQueue; //순회용 큐
+    std::set<Node*> mDynamicObjectNodeList; //동적오브젝트가 들어있는 노드만 저장 
+    std::vector<Node*> mQctNodeList; //전체노드 리스트
 
     //공간분할
     void BuildOctree(float x, float y, float z,  float w, float h, float d);
