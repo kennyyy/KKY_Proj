@@ -3,6 +3,6 @@
 void Node::SetParent(Node* pParent) {
     if (pParent == nullptr)
         return;
-    mpParent = pParent;
+    mpParentNode = pParent;
     mDepth = pParent->mDepth + 1;
 }

@@ -1,4 +1,220 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Collision">
+    <Position X="8.75" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAgABA=</HashCode>
+      <FileName>Collision.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Vector2">
+    <Position X="6.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAABAAAAAAAAAQBAAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>Math.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Vector3">
+    <Position X="4.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAIAAAAAAAAAAAQBAAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>Math.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Math" Collapsed="true">
+    <Position X="8.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Math.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Node">
+    <Position X="10.75" Y="6" Width="1.5" />
+    <Members>
+      <Field Name="mpParent" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAAAACAAAAAAACCAACABAIAAAgEAAAAEAAAA=</HashCode>
+      <FileName>Node.h</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="mbx" />
+      <Field Name="mpParentNode" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Object">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <AssociationLine Name="mbx" Type="Box" ManuallyRouted="true">
+      <Path>
+        <Point X="2" Y="1.227" />
+        <Point X="2.375" Y="1.227" />
+        <Point X="2.375" Y="4.021" />
+        <Point X="2.917" Y="4.021" Type="JumpStart" />
+        <Point X="3.083" Y="4.021" Type="JumpEnd" />
+        <Point X="4.437" Y="4.021" />
+        <Point X="4.437" Y="4.5" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AgAAAAAAAIAACAAAAAAAAAAAAAAAAAAAAAgAAAAAAgI=</HashCode>
+      <FileName>Object.h</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="mbx" />
+      <Field Name="mPosition" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="DynamicObject">
+    <Position X="0.5" Y="5" Width="1.5" />
+    <AssociationLine Name="mDirection" Type="Vector3">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.248" Y="0.537" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAIAAAAAAAAAABAAAAAAAAAAAAgAAEBAAAAI=</HashCode>
+      <FileName>Object.h</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="mDirection" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="StaticObject">
+    <Position X="2.25" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Object.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Octree">
+    <Position X="10.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAAAAAAAAABEAHEAAAAIBAQAAgAAQBCCALBAAAE=</HashCode>
+      <FileName>Octree.h</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="mRootNode" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Timer">
+    <Position X="8.75" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAACAAAAAAABAAAAAAAQAAAAAJAKABAAAAE=</HashCode>
+      <FileName>Timer.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Box">
+    <Position X="4" Y="4.5" Width="1.5" />
+    <AssociationLine Name="mCenterPoint" Type="Vector3">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.454" Y="-0.461" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="mHalf" Type="Vector3">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.683" Y="0.227" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="mMax" Type="Vector3">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.61" Y="-0.096" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="mMin" Type="Vector3">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.141" Y="0.706" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="mPoint" Type="Vector3">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.11" Y="0.425" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="v" Type="Vector3">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="1.37" Y="-0.013" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAEgBAAAEABAAAAAAAAQAAAAIgEQAAAJAgAAAAAAA=</HashCode>
+      <FileName>Utils.h</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="mCenterPoint" />
+      <Field Name="mHalf" />
+      <Field Name="mMax" />
+      <Field Name="mMin" />
+      <Field Name="mPoint" />
+      <Field Name="s" />
+      <Field Name="v" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Utils" Collapsed="true">
+    <Position X="8.75" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Utils.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="Float2" Collapsed="true">
+    <Position X="8.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Math.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="Float3" Collapsed="true">
+    <Position X="2.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Math.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="Rect">
+    <Position X="6.25" Y="4.5" Width="1.5" />
+    <AssociationLine Name="mCenterPoint" Type="Vector2">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-0.161" Y="0.55" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="mHalf" Type="Vector2">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-1.4" Y="-0.117" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="mMax" Type="Vector2">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-0.359" Y="0.237" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="mMin" Type="Vector2">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-0.077" Y="0.258" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="mPoint" Type="Vector2">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-1.015" Y="0.175" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="s" Type="Vector2">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-1.119" Y="0.279" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAgBAAAEABAAAAAAAAQAAACAgEQAAAJAgAAAAAAA=</HashCode>
+      <FileName>Utils.h</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="mCenterPoint" />
+      <Field Name="mHalf" />
+      <Field Name="mMax" />
+      <Field Name="mMin" />
+      <Field Name="mPoint" />
+      <Field Name="s" />
+      <Field Name="v" />
+    </ShowAsAssociation>
+  </Struct>
   <Font Name="맑은 고딕" Size="9" />
 </ClassDiagram>

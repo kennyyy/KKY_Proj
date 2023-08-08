@@ -5,7 +5,7 @@ class Node {
 public:
     int mIndex = 0;
     int mDepth = 0;
-    Node* mpParent = nullptr;
+    Node* mpParentNode = nullptr;
     Box mbx;
     std::vector< Node*> mChild; 
     std::vector<Object*> mDynamicObjectList;//노드영역 안에 있는 동적오브젝트 리스트
