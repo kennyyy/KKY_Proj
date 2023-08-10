@@ -45,6 +45,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FristWindow1", "FristWindow
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CreateDevice", "CreateDevice\CreateDevice.vcxproj", "{1A17C115-33D2-40DB-9623-F31EF2BD347E}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CreateDevice1", "CreateDevice1\CreateDevice1.vcxproj", "{0C606AD8-F59A-4FBE-BF11-B7400CC331EE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -189,6 +191,14 @@ Global
 		{1A17C115-33D2-40DB-9623-F31EF2BD347E}.Release|x64.Build.0 = Release|x64
 		{1A17C115-33D2-40DB-9623-F31EF2BD347E}.Release|x86.ActiveCfg = Release|Win32
 		{1A17C115-33D2-40DB-9623-F31EF2BD347E}.Release|x86.Build.0 = Release|Win32
+		{0C606AD8-F59A-4FBE-BF11-B7400CC331EE}.Debug|x64.ActiveCfg = Debug|x64
+		{0C606AD8-F59A-4FBE-BF11-B7400CC331EE}.Debug|x64.Build.0 = Debug|x64
+		{0C606AD8-F59A-4FBE-BF11-B7400CC331EE}.Debug|x86.ActiveCfg = Debug|Win32
+		{0C606AD8-F59A-4FBE-BF11-B7400CC331EE}.Debug|x86.Build.0 = Debug|Win32
+		{0C606AD8-F59A-4FBE-BF11-B7400CC331EE}.Release|x64.ActiveCfg = Release|x64
+		{0C606AD8-F59A-4FBE-BF11-B7400CC331EE}.Release|x64.Build.0 = Release|x64
+		{0C606AD8-F59A-4FBE-BF11-B7400CC331EE}.Release|x86.ActiveCfg = Release|Win32
+		{0C606AD8-F59A-4FBE-BF11-B7400CC331EE}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

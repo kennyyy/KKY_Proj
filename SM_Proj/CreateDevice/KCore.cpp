@@ -44,8 +44,9 @@ bool KCore::Run() {
 		}
 		else {
 
-			EngineFrame();
-			EngineRender();
+			if (!EngineFrame() || !EngineRender()){
+				break;
+			}
 
 		}
 	}
