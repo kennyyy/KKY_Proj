@@ -1,4 +1,12 @@
 #include "KSample.h"
+
+bool KSample::LoadTextureFile(std::wstring filename) {
+    HRESULT hr;
+    ID3D11Resource* texture;
+
+    hr = DirectX::CreateWICTextureFromFile();
+
+}
 bool  KSample::CreateVertexBuffer()
 {
     P_Vertex vList[3];
