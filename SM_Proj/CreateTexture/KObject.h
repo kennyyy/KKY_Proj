@@ -1,14 +1,15 @@
 #pragma once
-#include "KCore.h"
+#include "KStd.h"
 
 struct P_Vertex {
-	float x;
-	float y;
-	float z;
+	float x, y, z;
+	float u, v;
 };
 
-class KSample  : public KCore
+class KObject 
 {
+	ID3D11Device* m_pDevice = nullptr;
+	ID3D11DeviceContext* m_pImmediateContext = nullptr;
 public:
 	ID3D11Buffer* m_pVertexBuffer = nullptr;
 	ID3D11Buffer* m_pIndexBuffer = nullptr;
@@ -18,15 +19,22 @@ public:
 	ID3D11VertexShader* m_pVS = nullptr;
 	ID3D11PixelShader* m_pPS = nullptr;
 
+	ID3D11ShaderResourceView* m_pTextureSRV = nullptr;
+	std::vector<P_Vertex> m_VertexList;
 
-	bool CreateIndexBuffer();
+
+
+public:
+	void Set(ID3D11Device* pDevice, ID3D11DeviceContext* pImmediateContext);
 	bool CreateVertexBuffer();
+	bool CreateIndexBuffer();
 	bool  LoadVertexShader();
 	bool  LoadPixelShader();
 	bool  CreateInputLayout();
+	bool LoadTextureFile(std::wstring filename);
 
 public:
-	bool Init();
+	bool Init(std::wstring texFilename);
 	bool Frame();
 	bool Render();
 	bool Release();

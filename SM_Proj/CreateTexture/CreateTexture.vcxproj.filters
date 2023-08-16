@@ -51,6 +51,9 @@
     <ClInclude Include="WIC\WICTextureLoader.h">
       <Filter>WIC</Filter>
     </ClInclude>
+    <ClInclude Include="KObject.h">
+      <Filter>헤더파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="KWindow.cpp">
@@ -70,6 +73,9 @@
       <Filter>WIC</Filter>
     </ClCompile>
     <ClCompile Include="KDevice.cpp">
+      <Filter>소스파일</Filter>
+    </ClCompile>
+    <ClCompile Include="KObject.cpp">
       <Filter>소스파일</Filter>
     </ClCompile>
   </ItemGroup>

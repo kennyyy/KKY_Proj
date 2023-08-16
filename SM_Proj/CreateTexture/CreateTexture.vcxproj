@@ -144,6 +144,7 @@
   <ItemGroup>
     <ClCompile Include="KDevice.cpp" />
     <ClCompile Include="KCore.cpp" />
+    <ClCompile Include="KObject.cpp" />
     <ClCompile Include="KSample.cpp" />
     <ClCompile Include="KWindow.cpp" />
     <ClCompile Include="WIC\DDSTextureLoader.cpp" />
@@ -153,6 +154,7 @@
   <ItemGroup>
     <ClInclude Include="KDevice.h" />
     <ClInclude Include="KCore.h" />
+    <ClInclude Include="KObject.h" />
     <ClInclude Include="KSample.h" />
     <ClInclude Include="KWindow.h" />
     <ClInclude Include="KStd.h" />

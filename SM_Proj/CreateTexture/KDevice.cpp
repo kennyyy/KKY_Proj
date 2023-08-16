@@ -107,7 +107,7 @@ bool KDevice::Frame() {
 }
 bool  KDevice::PreRender()
 {
-    float color[4] = { 1,1,0.64333f,1 };
+    float color[4] = { 0,0,0,1 };
     m_pImmediateContext->ClearRenderTargetView(m_pRenderTargetView, color);
     return true;
 }

@@ -80,7 +80,7 @@ namespace
         GUID        target;
     };
 
-    const WICConvert g_WICConvert [] =
+    const WICConvert g_WICConvert[] =
     {
         // Note target GUID in this conversion table must be one of those directly supported formats (above).
 
@@ -142,9 +142,9 @@ namespace
 
     bool g_WIC2 = false;
 
-    BOOL WINAPI InitializeWICFactory(PINIT_ONCE, PVOID, PVOID *ifactory) noexcept
+    BOOL WINAPI InitializeWICFactory(PINIT_ONCE, PVOID, PVOID* ifactory) noexcept
     {
-    #if (_WIN32_WINNT >= _WIN32_WINNT_WIN8) || defined(_WIN7_PLATFORM_UPDATE)
+#if (_WIN32_WINNT >= _WIN32_WINNT_WIN8) || defined(_WIN7_PLATFORM_UPDATE)
         HRESULT hr = CoCreateInstance(
             CLSID_WICImagingFactory2,
             nullptr,
@@ -170,14 +170,14 @@ namespace
             );
             return SUCCEEDED(hr) ? TRUE : FALSE;
         }
-    #else
+#else
         return SUCCEEDED(CoCreateInstance(
             CLSID_WICImagingFactory,
             nullptr,
             CLSCTX_INPROC_SERVER,
             __uuidof(IWICImagingFactory),
             ifactory)) ? TRUE : FALSE;
-    #endif
+#endif
     }
 }
 
@@ -186,7 +186,7 @@ namespace DirectX
 {
     bool _IsWIC2();
     IWICImagingFactory* _GetWIC();
-        // Also used by ScreenGrab
+    // Also used by ScreenGrab
 
     bool _IsWIC2()
     {
@@ -269,7 +269,7 @@ namespace
         _In_opt_ ID3D11DeviceX* d3dDeviceX,
         _In_opt_ ID3D11DeviceContextX* d3dContextX,
 #endif
-        _In_ IWICBitmapFrameDecode *frame,
+        _In_ IWICBitmapFrameDecode* frame,
         _In_ size_t maxsize,
         _In_ D3D11_USAGE usage,
         _In_ unsigned int bindFlags,
@@ -661,7 +661,7 @@ namespace
                     assert(d3dContext != nullptr);
 
 #if defined(_XBOX_ONE) && defined(_TITLE)
-                    ID3D11Texture2D *pStaging = nullptr;
+                    ID3D11Texture2D* pStaging = nullptr;
                     CD3D11_TEXTURE2D_DESC stagingDesc(format, twidth, theight, 1, 1, 0, D3D11_USAGE_STAGING, D3D11_CPU_ACCESS_READ, 1, 0, 0);
                     initData.pSysMem = temp.get();
                     initData.SysMemPitch = static_cast<UINT>(rowPitch);
@@ -793,9 +793,9 @@ HRESULT DirectX::CreateWICTextureFromMemory(
 
 _Use_decl_annotations_
 #if defined(_XBOX_ONE) && defined(_TITLE)
-    HRESULT DirectX::CreateWICTextureFromMemory(
-        ID3D11DeviceX* d3dDevice,
-        ID3D11DeviceContextX* d3dContext,
+HRESULT DirectX::CreateWICTextureFromMemory(
+    ID3D11DeviceX* d3dDevice,
+    ID3D11DeviceContextX* d3dContext,
 #else
     HRESULT DirectX::CreateWICTextureFromMemory(
         ID3D11Device* d3dDevice,
@@ -905,9 +905,9 @@ HRESULT DirectX::CreateWICTextureFromMemoryEx(
 
 _Use_decl_annotations_
 #if defined(_XBOX_ONE) && defined(_TITLE)
-    HRESULT DirectX::CreateWICTextureFromMemoryEx(
-        ID3D11DeviceX* d3dDevice,
-        ID3D11DeviceContextX* d3dContext,
+HRESULT DirectX::CreateWICTextureFromMemoryEx(
+    ID3D11DeviceX* d3dDevice,
+    ID3D11DeviceContextX* d3dContext,
 #else
     HRESULT DirectX::CreateWICTextureFromMemoryEx(
         ID3D11Device* d3dDevice,
@@ -1002,9 +1002,11 @@ _Use_decl_annotations_
 //--------------------------------------------------------------------------------------
 _Use_decl_annotations_
 HRESULT DirectX::CreateWICTextureFromFile(
-    
-
-)
+    ID3D11Device* d3dDevice,
+    const wchar_t* fileName,
+    ID3D11Resource** texture,
+    ID3D11ShaderResourceView** textureView,
+    size_t maxsize)
 {
     return CreateWICTextureFromFileEx(d3dDevice,
         fileName,
@@ -1016,9 +1018,9 @@ HRESULT DirectX::CreateWICTextureFromFile(
 
 _Use_decl_annotations_
 #if defined(_XBOX_ONE) && defined(_TITLE)
-    HRESULT DirectX::CreateWICTextureFromFile(
-        ID3D11DeviceX* d3dDevice,
-        ID3D11DeviceContextX* d3dContext,
+HRESULT DirectX::CreateWICTextureFromFile(
+    ID3D11DeviceX* d3dDevice,
+    ID3D11DeviceContextX* d3dContext,
 #else
     HRESULT DirectX::CreateWICTextureFromFile(
         ID3D11Device* d3dDevice,
@@ -1108,9 +1110,9 @@ HRESULT DirectX::CreateWICTextureFromFileEx(
 
 _Use_decl_annotations_
 #if defined(_XBOX_ONE) && defined(_TITLE)
-    HRESULT DirectX::CreateWICTextureFromFileEx(
-        ID3D11DeviceX* d3dDevice,
-        ID3D11DeviceContextX* d3dContext,
+HRESULT DirectX::CreateWICTextureFromFileEx(
+    ID3D11DeviceX* d3dDevice,
+    ID3D11DeviceContextX* d3dContext,
 #else
     HRESULT DirectX::CreateWICTextureFromFileEx(
         ID3D11Device* d3dDevice,
