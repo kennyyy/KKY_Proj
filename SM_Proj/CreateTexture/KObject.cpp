@@ -19,6 +19,51 @@ bool KObject::LoadTextureFile(std::wstring filename) {
     }
     return true;
 
+    //더 다양한 텍스처 파일 로딩
+   /* auto imageobj = std::make_unique<DirectX::ScratchImage>();
+    DirectX::TexMetadata mdata;
+
+    HRESULT hr = DirectX::GetMetadataFromDDSFile(filename.c_str(), DirectX::DDS_FLAGS_NONE, mdata);
+    if (SUCCEEDED(hr))
+    {
+        hr = DirectX::LoadFromDDSFile(filename.c_str(), DirectX::DDS_FLAGS_NONE, &mdata, *imageobj);
+        if (SUCCEEDED(hr))
+        {
+            hr = DirectX::CreateShaderResourceView(m_pDevice, imageobj->GetImages(), imageobj->GetImageCount(), mdata, &m_pTexSRV);
+            if (SUCCEEDED(hr))
+            {
+                return true;
+            }
+        }
+    }
+    hr = DirectX::GetMetadataFromWICFile(filename.c_str(), DirectX::WIC_FLAGS_NONE, mdata);
+    if (SUCCEEDED(hr))
+    {
+        hr = DirectX::LoadFromWICFile(filename.c_str(), DirectX::WIC_FLAGS_NONE, &mdata, *imageobj);
+        if (SUCCEEDED(hr))
+        {
+            hr = DirectX::CreateShaderResourceView(m_pDevice, imageobj->GetImages(), imageobj->GetImageCount(), mdata, &m_pTexSRV);
+            if (SUCCEEDED(hr))
+            {
+                return true;
+            }
+        }
+    }
+    hr = DirectX::GetMetadataFromTGAFile(filename.c_str(), DirectX::TGA_FLAGS_NONE, mdata);
+    if (SUCCEEDED(hr))
+    {
+        hr = DirectX::LoadFromTGAFile(filename.c_str(), DirectX::TGA_FLAGS_NONE, &mdata, *imageobj);
+        if (SUCCEEDED(hr))
+        {
+            hr = DirectX::CreateShaderResourceView(m_pDevice, imageobj->GetImages(), imageobj->GetImageCount(), mdata, &m_pTexSRV);
+            if (SUCCEEDED(hr))
+            {
+                return true;
+            }
+        }
+    }
+    return false;*/
+
 }
 bool  KObject::CreateVertexBuffer()
 {
@@ -63,13 +108,11 @@ bool  KObject::CreateVertexBuffer()
     Desc.Usage = D3D11_USAGE_DEFAULT;
     Desc.BindFlags = D3D11_BIND_VERTEX_BUFFER;
 
-    CD3D11_BUFFER_DESC cbc(sizeof(P_Vertex) * 4, D3D11_BIND_VERTEX_BUFFER);
+    CD3D11_BUFFER_DESC cbc(sizeof(P_Vertex) * m_VertexList.size() , D3D11_BIND_VERTEX_BUFFER);
 
     D3D11_SUBRESOURCE_DATA InitialData;
     ZeroMemory(&InitialData, sizeof(InitialData));
     InitialData.pSysMem = &m_VertexList.at(0);
-
-  
 
     HRESULT hr = m_pDevice->CreateBuffer(
         &cbc,

@@ -2,6 +2,8 @@
 #include <windows.h>
 #include <string>
 #include <vector>
+#include <memory>
+
 #include <d3d11.h>
 #include <dxgi.h>
 #include <d3dcompiler.h>			//D3DComplileFromFile
@@ -12,6 +14,7 @@
 #include "./WIC/WICTextureLoader.h" // 기타
 #include "./WIC/DDSTextureLoader.h" // DDS 전용
 
+#include "./WIC/DirectXTex.h" // 이게 이미지 호환성이 넓음
 
 #define T_PI (3.141592f)
 #define T_EPSILON ( 0.0001f)
