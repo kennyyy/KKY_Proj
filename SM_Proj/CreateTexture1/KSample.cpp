@@ -21,21 +21,13 @@ bool  KSample::Init()
     m_shaderMgr.Set(m_pDevice, m_pImmediateContext);
     m_textureMgr.Set(m_pDevice, m_pImmediateContext);
     std::wstring textname[] = { L"../../res/kgcabk.bmp", L"../../res/ade4.dds" , L"../../res/mapcontrol.png",  L"../../res/103.tga" };
-   /* for (int i = 0; i < 100; i++) {
+    for (int i = 0; i < 100; i++) {
         KObject* pObj = new KObject;
         pObj->Set(m_pDevice, m_pImmediateContext);
-        pObj->Init(textname[0]);
+        pObj->Init(m_textureMgr ,textname[i%4], m_shaderMgr, L"Plane.hlsl");
         m_ObjList.push_back(pObj);
-    }*/
- 
-        KObject* pObj = new KObject;
-        pObj->Set(m_pDevice, m_pImmediateContext);
-        pObj->Init(m_textureMgr ,textname[1], m_shaderMgr, L"Plane.hlsl");
-        m_ObjList.push_back(pObj);
-        KObject* pObj1 = new KObject;
-        pObj1->Set(m_pDevice, m_pImmediateContext);
-        pObj1->Init(m_textureMgr, textname[2], m_shaderMgr, L"Plane.hlsl");
-        m_ObjList.push_back(pObj1);
+    }
+
 
     return true;
 }

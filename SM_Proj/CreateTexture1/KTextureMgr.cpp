@@ -5,7 +5,7 @@ void  KTexture::Apply(ID3D11DeviceContext* pImmediateContext, int iSlot)  const{
 }
 bool  KTexture::LoadTexture(ID3D11Device* pDevice, std::wstring filename) {
 
-    HRESULT hr;
+   /*HRESULT hr;
 
     hr = DirectX::CreateWICTextureFromFile(pDevice, filename.c_str(), nullptr, &m_pTextureSRV);
     if (FAILED(hr)) {
@@ -15,10 +15,10 @@ bool  KTexture::LoadTexture(ID3D11Device* pDevice, std::wstring filename) {
             return false;
         }
     }
-    return true;
+    return true;*/
 
     //더 다양한 텍스처 파일 로딩
-   /* auto imageobj = std::make_unique<DirectX::ScratchImage>();
+    auto imageobj = std::make_unique<DirectX::ScratchImage>();
     DirectX::TexMetadata mdata;
 
     HRESULT hr = DirectX::GetMetadataFromDDSFile(filename.c_str(), DirectX::DDS_FLAGS_NONE, mdata);
@@ -27,7 +27,7 @@ bool  KTexture::LoadTexture(ID3D11Device* pDevice, std::wstring filename) {
         hr = DirectX::LoadFromDDSFile(filename.c_str(), DirectX::DDS_FLAGS_NONE, &mdata, *imageobj);
         if (SUCCEEDED(hr))
         {
-            hr = DirectX::CreateShaderResourceView(m_pDevice, imageobj->GetImages(), imageobj->GetImageCount(), mdata, &m_pTexSRV);
+            hr = DirectX::CreateShaderResourceView(pDevice, imageobj->GetImages(), imageobj->GetImageCount(), mdata, &m_pTextureSRV);
             if (SUCCEEDED(hr))
             {
                 return true;
@@ -40,7 +40,7 @@ bool  KTexture::LoadTexture(ID3D11Device* pDevice, std::wstring filename) {
         hr = DirectX::LoadFromWICFile(filename.c_str(), DirectX::WIC_FLAGS_NONE, &mdata, *imageobj);
         if (SUCCEEDED(hr))
         {
-            hr = DirectX::CreateShaderResourceView(m_pDevice, imageobj->GetImages(), imageobj->GetImageCount(), mdata, &m_pTexSRV);
+            hr = DirectX::CreateShaderResourceView(pDevice, imageobj->GetImages(), imageobj->GetImageCount(), mdata, &m_pTextureSRV);
             if (SUCCEEDED(hr))
             {
                 return true;
@@ -53,14 +53,14 @@ bool  KTexture::LoadTexture(ID3D11Device* pDevice, std::wstring filename) {
         hr = DirectX::LoadFromTGAFile(filename.c_str(), DirectX::TGA_FLAGS_NONE, &mdata, *imageobj);
         if (SUCCEEDED(hr))
         {
-            hr = DirectX::CreateShaderResourceView(m_pDevice, imageobj->GetImages(), imageobj->GetImageCount(), mdata, &m_pTexSRV);
+            hr = DirectX::CreateShaderResourceView(pDevice, imageobj->GetImages(), imageobj->GetImageCount(), mdata, &m_pTextureSRV);
             if (SUCCEEDED(hr))
             {
                 return true;
             }
         }
     }
-    return false;*/
+    return false;
 }
 bool  KTexture::Release() {
     if (m_pTextureSRV) m_pTextureSRV->Release();

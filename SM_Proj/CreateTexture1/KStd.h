@@ -9,14 +9,16 @@
 #include <d3d11.h>
 #include <dxgi.h>
 #include <d3dcompiler.h>			//D3DComplileFromFile
+#include "DirectXTex.h" // 이게 텍스처 호환성이 넓음
 #pragma comment (lib, "dxgi.lib") // d3d11.dll
 #pragma comment (lib, "d3d11.lib") // d3d11.dll
 #pragma comment (lib, "d3dcompiler.lib") // d3d11.dll
+#pragma comment (lib, "DirectXTex.lib")
 
 #include "./WIC/WICTextureLoader.h" // 기타
 #include "./WIC/DDSTextureLoader.h" // DDS 전용
 
-#include "./WIC/DirectXTex.h" // 이게 텍스처 호환성이 넓음
+
 
 #define T_PI (3.141592f)
 #define T_EPSILON ( 0.0001f)
