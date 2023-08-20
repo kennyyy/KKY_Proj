@@ -1,6 +1,6 @@
 #pragma once
 #include "KCore.h"
-#include "KObject.h"
+#include "KPlaneObj.h"
 
 
 class KSample : public KCore{

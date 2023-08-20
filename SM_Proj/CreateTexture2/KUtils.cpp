@@ -1,9 +1,9 @@
 #include "KUtils.h"
-bool KRect::Intersect(KRect& p, KRect& ret)
+bool Rect::Intersect(Rect& p, Rect& ret)
 {
     return false;
 }
-bool KRect::operator == (KRect& p)
+bool Rect::operator == (Rect& p)
 {
     if (fabs(v.x - p.v.x) > 0.0001f)
     {
@@ -20,24 +20,24 @@ bool KRect::operator == (KRect& p)
     }
     return false;
 }
-bool KRect::operator != (KRect& p)
+bool Rect::operator != (Rect& p)
 {
     return !(*this == p);
 }
-KRect KRect::operator + (KRect& p)
+Rect Rect::operator + (Rect& p)
 {
-    KRect rt;
+    Rect rt;
     float fMinX = min(v.x, p.v.x);
     float fMinY = min(v.y, p.v.y);
     float fMaxX = max(m_Point[2].x, p.m_Point[2].x);
     float fMaxY = max(m_Point[2].y, p.m_Point[2].y);
-    KVector2 pos = { fMinX, fMinY };
+    Vector2 pos = { fMinX, fMinY };
     rt.Set(pos, fMaxX - fMinX, fMaxY - fMinY);
     return rt;
 }
-KRect KRect::operator - (KRect& p)
+Rect Rect::operator - (Rect& p)
 {
-    KRect rt;
+    Rect rt;
     rt.m_bEnable = false;
     if (ToRect(p))
     {
@@ -52,13 +52,13 @@ KRect KRect::operator - (KRect& p)
     }
     return rt;
 }
-KRect KRect::operator - (KVector2& p)
+Rect Rect::operator - (Vector2& p)
 {
     v.x -= p.x;
     v.y -= p.y;
-    return KRect(v.x, v.y, m_fWidth, m_fHeight);
+    return Rect(v.x, v.y, m_fWidth, m_fHeight);
 }
-KRect KRect::operator * (float fValue)
+Rect Rect::operator * (float fValue)
 {
     if (fValue <= 0.0f)
     {
@@ -66,9 +66,9 @@ KRect KRect::operator * (float fValue)
     }
     m_fWidth *= fValue;
     m_fHeight *= fValue;
-    return KRect(v.x, v.y, m_fWidth, m_fHeight);
+    return Rect(v.x, v.y, m_fWidth, m_fHeight);
 }
-KRect KRect::operator / (float fValue)
+Rect Rect::operator / (float fValue)
 {
     if (fValue <= 0.0f)
     {
@@ -76,15 +76,15 @@ KRect KRect::operator / (float fValue)
     }
     m_fWidth /= fValue;
     m_fHeight /= fValue;
-    return KRect(v.x, v.y, m_fWidth, m_fHeight);
+    return Rect(v.x, v.y, m_fWidth, m_fHeight);
 }
-void KRect::Set(KVector2 p)
+void Rect::Set(Vector2 p)
 {
     v = { p.x, p.y };
     s = { m_fWidth, m_fHeight };
     Set(m_fWidth, m_fHeight);
 }
-void KRect::Set(float fw, float fh)
+void Rect::Set(float fw, float fh)
 {
     m_fWidth = fw;
     m_fHeight = fh;
@@ -97,22 +97,22 @@ void KRect::Set(float fw, float fh)
     m_Min = m_Point[0];
     m_Max = m_Point[2];
 }
-void KRect::Set(KVector2 p, float fw, float fh)
+void Rect::Set(Vector2 p, float fw, float fh)
 {
     v = p;
     s = { fw, fh };
     Set(fw, fh);
 }
-void KRect::Set(float fx, float fy, float fw, float fh)
+void Rect::Set(float fx, float fy, float fw, float fh)
 {
     v = { fx, fy };
     s = { fw, fh };
     Set(fw, fh);
 }
 
-bool KRect::ToRect(KRect& rt)
+bool Rect::ToRect(Rect& rt)
 {
-    KRect sum = (*this) + rt;
+    Rect sum = (*this) + rt;
     float fX = m_fWidth + rt.m_fWidth;
     float fY = m_fHeight + rt.m_fHeight;
     if (sum.m_fWidth <= fX)
@@ -124,7 +124,7 @@ bool KRect::ToRect(KRect& rt)
     }
     return false;
 }
-bool KRect::ToPoint(KVector2& p)
+bool Rect::ToPoint(Vector2& p)
 {
     if (m_Min.x <= p.x && m_Max.x >= p.x &&
         m_Min.y <= p.y && m_Max.y >= p.y)
@@ -133,9 +133,9 @@ bool KRect::ToPoint(KVector2& p)
     }
     return false;
 }
-KRect::KRect() : m_bEnable(true) {}
+Rect::Rect() : m_bEnable(true) {}
 
-KRect::KRect(float fx, float fy, float fw, float fh)
+Rect::Rect(float fx, float fy, float fw, float fh)
 {
     m_bEnable = true;
     Set(fx, fy, fw, fh);
@@ -144,7 +144,7 @@ KRect::KRect(float fx, float fy, float fw, float fh)
 
 ///
 /////
-bool KBox::operator == (KBox& p)
+bool Box::operator == (Box& p)
 {
     if (fabs(v.x - p.v.x) > 0.0001f)
     {
@@ -167,27 +167,27 @@ bool KBox::operator == (KBox& p)
     }
     return false;
 }
-bool KBox::operator != (KBox& p)
+bool Box::operator != (Box& p)
 {
     return !(*this == p);
 }
 // union
-KBox KBox::operator + (KBox& p)
+Box Box::operator + (Box& p)
 {
-    KBox rt;
+    Box rt;
     float fMinX = min(v.x, p.v.x);
     float fMinY = min(v.y, p.v.y);
     float fMinZ = min(v.z, p.v.z);
     float fMaxX = max(m_Max.x, p.m_Max.x);
     float fMaxY = max(m_Max.y, p.m_Max.y);
     float fMaxZ = max(m_Max.z, p.m_Max.z);
-    KVector3 pos = { fMinX, fMinY, fMinZ };
+    Vector3 pos = { fMinX, fMinY, fMinZ };
     rt.Set(pos, fMaxX - fMinX, fMaxY - fMinY, fMaxZ - fMinZ);
     return rt;
 }
-KBox KBox::operator - (KBox& p)
+Box Box::operator - (Box& p)
 {
-    KBox rt;
+    Box rt;
     rt.m_bEnable = false;
     if (ToBox(p))
     {
@@ -205,14 +205,14 @@ KBox KBox::operator - (KBox& p)
     }
     return rt;
 }
-KBox KBox::operator - (KVector3& p)
+Box Box::operator - (Vector3& p)
 {
     v.x -= p.x;
     v.y -= p.y;
     v.z -= p.z;
-    return KBox(v.x, v.y, v.z, m_fWidth, m_fHeight, m_fDepth);
+    return Box(v.x, v.y, v.z, m_fWidth, m_fHeight, m_fDepth);
 }
-KBox KBox::operator * (float fValue)
+Box Box::operator * (float fValue)
 {
     if (fValue <= 0.0f)
     {
@@ -221,9 +221,9 @@ KBox KBox::operator * (float fValue)
     m_fWidth *= fValue;
     m_fHeight *= fValue;
     m_fDepth *= fValue;
-    return KBox(v.x, v.y, v.z, m_fWidth, m_fHeight, m_fDepth);
+    return Box(v.x, v.y, v.z, m_fWidth, m_fHeight, m_fDepth);
 }
-KBox KBox::operator / (float fValue)
+Box Box::operator / (float fValue)
 {
     if (fValue <= 0.0f)
     {
@@ -232,15 +232,15 @@ KBox KBox::operator / (float fValue)
     m_fWidth /= fValue;
     m_fHeight /= fValue;
     m_fDepth /= fValue;
-    return KBox(v.x, v.y, v.z, m_fWidth, m_fHeight, m_fDepth);
+    return Box(v.x, v.y, v.z, m_fWidth, m_fHeight, m_fDepth);
 }
-void KBox::Set(KVector3 p)
+void Box::Set(Vector3 p)
 {
     v = p;
     s = { m_fWidth, m_fHeight, m_fDepth };
     Set(m_fWidth, m_fHeight, m_fDepth);
 }
-void KBox::Set(float fSizeX, float fSizeY, float fSizeZ)
+void Box::Set(float fSizeX, float fSizeY, float fSizeZ)
 {
     m_fWidth = fSizeX;
     m_fHeight = fSizeY;
@@ -266,22 +266,22 @@ void KBox::Set(float fSizeX, float fSizeY, float fSizeZ)
     m_Max = m_Point[5];
     m_Center = (m_Max + m_Min) * 0.5f;
 }
-void KBox::Set(KVector3 p, float fw, float fh, float fz)
+void Box::Set(Vector3 p, float fw, float fh, float fz)
 {
     v = p;
     s = { fw, fh, fz };
     Set(fw, fh, fz);
 }
-void KBox::Set(float fx, float fy, float fz, float fw, float fh, float fd)
+void Box::Set(float fx, float fy, float fz, float fw, float fh, float fd)
 {
     v = { fx, fy, fz };
     s = { fw, fh, fd };
     Set(fw, fh, fd);
 }
 
-bool KBox::ToBox(KBox& rt)
+bool Box::ToBox(Box& rt)
 {
-    KBox sum = (*this) + rt;
+    Box sum = (*this) + rt;
     float fX = m_fWidth + rt.m_fWidth;
     float fY = m_fHeight + rt.m_fHeight;
     float fZ = m_fDepth + rt.m_fDepth;
@@ -297,7 +297,7 @@ bool KBox::ToBox(KBox& rt)
     }
     return false;
 }
-bool KBox::ToPoint(KVector3& p)
+bool Box::ToPoint(Vector3& p)
 {
     if (m_Min.x <= p.x && m_Max.x >= p.x &&
         m_Min.y <= p.y && m_Max.y >= p.y &&
@@ -307,9 +307,9 @@ bool KBox::ToPoint(KVector3& p)
     }
     return false;
 }
-KBox::KBox() : m_bEnable(true) {}
+Box::Box() : m_bEnable(true) {}
 
-KBox::KBox(float fx, float fy, float fz,
+Box::Box(float fx, float fy, float fz,
     float fw, float fh, float fd)
 {
     m_bEnable = true;

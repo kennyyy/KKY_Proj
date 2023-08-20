@@ -8,11 +8,20 @@ struct VS_OUT {
     float2 t : TEXTURE;
 };
 
+cbuffer cb0 {
+    matrix g_mtxWorld :  packoffset(c0);
+    matrix g_mtxView:  packoffset(c4);
+    matrix g_mtxProj : packoffset(c8);
+};
+
 
 VS_OUT VS(VS_IN vin)
 {
     VS_OUT vOut = (VS_OUT)0;
-    vOut.p = float4(vin.p.x, vin.p.y, vin.p.z, 1);
+    vOut.p = mul(float4(vin.p, 1.0f),    g_mtxWorld);
+    vOut.p = mul(vOut.p,    g_mtxView);
+    vOut.p = mul(vOut.p,    g_mtxProj);
+   // vOut.p = float4(vin.p.x, vin.p.y, vin.p.z, 1);
     vOut.t = vin.t;
     return vOut;
 }

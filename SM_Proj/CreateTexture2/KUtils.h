@@ -1,78 +1,78 @@
 #pragma once
 #include "KMath.h"
-struct KRect 
+struct Rect 
 {
     bool  m_bEnable = true;
     float m_fWidth = 0.0f;
     float m_fHeight = 0.0f;
-    KVector2 m_Point[4];
-    KVector2 m_Center;
-    KVector2 m_Half;
-    KVector2 m_Min;
-    KVector2 m_Max;
-    KVector2 v;
-    KVector2 s;
-    bool Intersect(KRect& p, KRect& ret);
-    bool operator == (KRect& p);
-    bool operator != (KRect& p);
-    KRect operator + (KRect& p);
-    KRect operator - (KRect& p);
-    KRect operator - (KVector2& p);
-    KRect operator * (float fValue);
-    KRect operator / (float fValue);
-    void Set(KVector2 p);
+    Vector2 m_Point[4];
+    Vector2 m_Center;
+    Vector2 m_Half;
+    Vector2 m_Min;
+    Vector2 m_Max;
+    Vector2 v;
+    Vector2 s;
+    bool Intersect(Rect& p, Rect& ret);
+    bool operator == (Rect& p);
+    bool operator != (Rect& p);
+    Rect operator + (Rect& p);
+    Rect operator - (Rect& p);
+    Rect operator - (Vector2& p);
+    Rect operator * (float fValue);
+    Rect operator / (float fValue);
+    void Set(Vector2 p);
     void Set(float fw, float fh);
-    void Set(KVector2 p, float fw, float fh);
+    void Set(Vector2 p, float fw, float fh);
     void Set(float fx, float fy, float fw, float fh);
 
-    bool ToRect(KRect& rt);
-    bool ToPoint(KVector2& p);
-    KRect();
-    KRect(float fx, float fy, float fw, float fh);
+    bool ToRect(Rect& rt);
+    bool ToPoint(Vector2& p);
+    Rect();
+    Rect(float fx, float fy, float fw, float fh);
 };
-struct KBox 
+struct Box 
 {
     bool  m_bEnable = true;
     float m_fWidth = 0.0f;
     float m_fHeight = 0.0f;
     float m_fDepth = 0.0f;
-    KVector3 m_Point[8];
-    KVector3 m_Center;
-    KVector3 m_Half;
-    KVector3 m_Min;
-    KVector3 m_Max;
-    KVector3 v;
-    KVector3 s;
+    Vector3 m_Point[8];
+    Vector3 m_Center;
+    Vector3 m_Half;
+    Vector3 m_Min;
+    Vector3 m_Max;
+    Vector3 v;
+    Vector3 s;
 
-    bool operator == (KBox& p);
-    bool operator != (KBox& p);
+    bool operator == (Box& p);
+    bool operator != (Box& p);
     // union
-    KBox operator + (KBox& p);
-    KBox operator - (KBox& p);
-    KBox operator - (KVector3& p);
-    KBox operator * (float fValue);
-    KBox operator / (float fValue);
-    void Set(KVector3 p);
+    Box operator + (Box& p);
+    Box operator - (Box& p);
+    Box operator - (Vector3& p);
+    Box operator * (float fValue);
+    Box operator / (float fValue);
+    void Set(Vector3 p);
     void Set(float fSizeX, float fSizeY, float fSizeZ);
-    void Set(KVector3 p, float fw, float fh, float fz);
+    void Set(Vector3 p, float fw, float fh, float fz);
     void Set(float fx, float fy, float fz, float fw, float fh, float fd);
 
-    bool ToBox(KBox& rt);
-    bool ToPoint(KVector3& p);
-    KBox();
+    bool ToBox(Box& rt);
+    bool ToPoint(Vector3& p);
+    Box();
 
-    KBox(float fx, float fy, float fz,
+    Box(float fx, float fy, float fz,
         float fw, float fh, float fd);
 };
 
-struct KSphere
+struct Sphere
 {
-    KVector3 vCenter;
+    Vector3 vCenter;
     float    fRadius;
 };
-struct KCircle
+struct Circle
 {
-    KVector2 vCenter;
+    Vector2 vCenter;
     float    fRadius;
 };
 class KUtils

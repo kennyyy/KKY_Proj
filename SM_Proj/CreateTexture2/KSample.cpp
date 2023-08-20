@@ -20,10 +20,17 @@ bool  KSample::Init()
 
     m_shaderMgr.Set(m_pDevice, m_pImmediateContext);
     m_textureMgr.Set(m_pDevice, m_pImmediateContext);
+
     std::wstring textname[] = { L"../../res/kgcabk.bmp", L"../../res/ade4.dds" , L"../../res/mapcontrol.png",  L"../../res/103.tga" };
-    for (int i = 0; i < 100; i++) {
-        KObject* pObj = new KObject;
+    for (int i = 0; i < 5; i++) {
+        KObject* pObj = new KPlaneObj;
         pObj->Set(m_pDevice, m_pImmediateContext);
+        pObj->SetSRT(Vector3(1, 1, 1), Vector3(0, 0, 0), Vector3(0, 0, 0));
+        pObj->SetPosition(Vector3(randstep(-1.0f, +1.0f), randstep(-1.0f, +1.0f), 0));
+
+        pObj->m_vScale.x = randstep(0.1f, 0.2f);
+        pObj->m_vScale.y = randstep(0.1f, 0.2f);
+        pObj->m_vScale.z = 1.0f;
         pObj->Init(m_textureMgr ,textname[i%4], m_shaderMgr, L"Plane.hlsl");
         m_ObjList.push_back(pObj);
     }
@@ -42,6 +49,7 @@ bool  KSample::Render()
 {
     m_pImmediateContext->OMSetBlendState(m_AlphaBlend, 0, -1);
     for (auto obj : m_ObjList) {
+        obj->SetMatrix(nullptr, nullptr, nullptr);
         obj->Render();
     }
     return true;

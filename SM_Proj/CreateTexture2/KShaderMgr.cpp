@@ -19,6 +19,11 @@ bool KShader::LoadVertexShader(ID3D11Device* pDevice, std::wstring filename) {
     if (FAILED(hr))
     {
         //ErrorCode
+        TCHAR pMessage[500];
+        mbstowcs(pMessage, (CHAR*)ErrorCode->GetBufferPointer(), 500);
+        MessageBox(NULL, pMessage, L"ERROR", MB_OK);
+        if (ErrorCode) ErrorCode->Release();
+        return false;
     }
     hr = pDevice->CreateVertexShader(
         m_VertexShaderCode->GetBufferPointer(),

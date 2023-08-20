@@ -1,5 +1,5 @@
 #include "KMath.h"
-bool KVector2::operator == (KVector2& p)
+bool Vector2::operator == (Vector2& p)
 {
     if (fabs(x - p.x) > T_EPSILON)
     {
@@ -10,59 +10,59 @@ bool KVector2::operator == (KVector2& p)
     }
     return false;
 }
-bool KVector2::operator != (KVector2& p)
+bool Vector2::operator != (Vector2& p)
 {
     return !(*this == p);
 }
-KVector2 KVector2::operator + (KVector2& p)
+Vector2 Vector2::operator + (Vector2& p)
 {
-    return KVector2(x + p.x, y + p.y);
+    return Vector2(x + p.x, y + p.y);
 }
-KVector2 KVector2::operator - (KVector2& p)
+Vector2 Vector2::operator - (Vector2& p)
 {
-    return KVector2(x - p.x, y - p.y);
+    return Vector2(x - p.x, y - p.y);
 }
-KVector2 KVector2::operator * (float fValue)
+Vector2 Vector2::operator * (float fValue)
 {
-    return KVector2(x * fValue, y * fValue);
+    return Vector2(x * fValue, y * fValue);
 }
-KVector2 KVector2::operator / (float fValue)
+Vector2 Vector2::operator / (float fValue)
 {
-    return KVector2(x / fValue, y / fValue);
+    return Vector2(x / fValue, y / fValue);
 }
-KVector2& KVector2::operator /= (float fValue)
+Vector2& Vector2::operator /= (float fValue)
 {
     x = x / fValue;
     y = y / fValue;
     return *this;
 }
-float KVector2::Length()
+float Vector2::Length()
 {
     float fDistance = sqrt(x * x + y * y);
     return fDistance;
 }
-static float Length(KVector2& p)
+static float Length(Vector2& p)
 {
     float fDistance = sqrt(p.x * p.x + p.y * p.y);
     return fDistance;
 }
-KVector2::KVector2() {}
-KVector2::KVector2(float fx, float fy)
+Vector2::Vector2() {}
+Vector2::Vector2(float fx, float fy)
 {
     x = fx;
     y = fy;
 }
-float KVector3::operator | (KVector3 const& v)
+float Vector3::operator | (Vector3 const& v)
 {
     return x * v.x + y * v.y + z * v.z;
 }
-KVector3 KVector3::operator ^ (KVector3 const& v)
+Vector3 Vector3::operator ^ (Vector3 const& v)
 {
-    return KVector3( y * v.z - z*v.y,
+    return Vector3( y * v.z - z*v.y,
                     z * v.x - x * v.z,
                     x * v.y - y * v.x);
 }
-bool KVector3::operator == (KVector3& p)
+bool Vector3::operator == (Vector3& p)
 {
     if (fabs(x - p.x) > T_EPSILON)
     {
@@ -76,53 +76,53 @@ bool KVector3::operator == (KVector3& p)
     }
     return false;
 }
-bool KVector3::operator != (KVector3& p)
+bool Vector3::operator != (Vector3& p)
 {
     return !(*this == p);
 }
-KVector3 KVector3::operator + (KVector3& p)
+Vector3 Vector3::operator + (Vector3& p)
 {
-    return KVector3(x + p.x, y + p.y, z + p.z);
+    return Vector3(x + p.x, y + p.y, z + p.z);
 }
-KVector3 KVector3::operator - (KVector3& p)
+Vector3 Vector3::operator - (Vector3& p)
 {
-    return KVector3(x - p.x, y - p.y, z - p.z);
+    return Vector3(x - p.x, y - p.y, z - p.z);
 }
-KVector3 KVector3::operator * (float fValue)
+Vector3 Vector3::operator * (float fValue)
 {
-    return KVector3(x * fValue, y * fValue, z * fValue);
+    return Vector3(x * fValue, y * fValue, z * fValue);
 }
-KVector3 KVector3::operator / (float fValue)
+Vector3 Vector3::operator / (float fValue)
 {
-    return KVector3(x / fValue, y / fValue, z / fValue);
+    return Vector3(x / fValue, y / fValue, z / fValue);
 }
-KVector3& KVector3::operator /= (float fValue)
+Vector3& Vector3::operator /= (float fValue)
 {
     x = x / fValue;
     y = y / fValue;
     z = z / fValue;
     return *this;
 }
-float KVector3::Length()
+float Vector3::Length()
 {
     float fDistance = sqrt(x * x + y * y + z * z);
     return fDistance;
 }
-static float GetDistance(KVector3& p)
+static float GetDistance(Vector3& p)
 {
     float fDistance = sqrt(p.x * p.x + p.y * p.y + p.z * p.z);
     return fDistance;
 }
-KVector3::KVector3() {}
-KVector3::KVector3(float fx, float fy, float fz) 
+Vector3::Vector3() {}
+Vector3::Vector3(float fx, float fy, float fz) 
 {
     x = fx;
     y = fy;
     z = fz;
 }
-KVector3 KVector3::operator * (KMatrix const& m)
+Vector3 Vector3::operator * (Matrix const& m)
 {
-    KVector4 t;
+    Vector4 t;
     t.x = x * m._11 + y * m._21 + z * m._31 + 1.0f * m._41;
     t.y = x * m._12 + y * m._22 + z * m._32 + 1.0f * m._42;
     t.z = x * m._13 + y * m._23 + z * m._33 + 1.0f * m._43;
@@ -135,25 +135,25 @@ KVector3 KVector3::operator * (KMatrix const& m)
         t.z /= t.w;
         t.w /= t.w;
     }
-    return KVector3(t.x, t.y, t.z);
+    return Vector3(t.x, t.y, t.z);
 }
-void KVector3::Normalize()
+void Vector3::Normalize()
 {
     float fInvertLength = 1.0f / Length();
     x = x * fInvertLength;
     y = y * fInvertLength;
     z = z * fInvertLength;
 }
-KVector3 KVector3::NormalVector()
+Vector3 Vector3::NormalVector()
 {
     float fInvertLength = 1.0f / Length();    
     return (*this) * fInvertLength;
 }
-float KVector3::Angle(KVector3& v)
+float Vector3::Angle(Vector3& v)
 {
     // ¡§±‘»≠
-    KVector3 a = NormalVector();
-    KVector3 b = v.NormalVector();
+    Vector3 a = NormalVector();
+    Vector3 b = v.NormalVector();
     float fCosAngle = a | b;
     float fRadian = acos(fCosAngle);
     float fDegree = RadianToDegree(fRadian);
