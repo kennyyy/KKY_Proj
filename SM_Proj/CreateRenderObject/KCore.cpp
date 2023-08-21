@@ -9,8 +9,8 @@ bool  KCore::EngineInit()
 {
     KDevice::Init();
     m_GameTimer.Init();
-    m_MainCamera.Init();
     KInput::GetInstance().Init();
+    m_MainCamera.Init();
     Init();
     return true;
 }
@@ -28,8 +28,8 @@ bool  KCore::EngineRender()
    
     KDevice::PreRender();
     Render();
-    m_GameTimer.Render();
     m_MainCamera.Render();
+    m_GameTimer.Render();
     KInput::GetInstance().Render();
     KDevice::PostRender();
     return true;

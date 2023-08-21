@@ -29,7 +29,7 @@ void KNpcObj::Move(float fSecond) {
 }
 bool KNpcObj::Frame() {
 	Matrix mtxScale, mtxRotation, mtxTranslate;
-	mtxScale.Sclae(m_vScale);
+	mtxScale.Scale(m_vScale);
 	mtxRotation.ZRotate(m_vRotation.z);
 	mtxTranslate.Translation(m_vPosition);
 	m_mtxWorld = mtxScale * mtxRotation * mtxTranslate;

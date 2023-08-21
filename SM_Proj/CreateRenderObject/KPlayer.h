@@ -1,5 +1,11 @@
 #pragma once
-class KPlayer
+#include "KPlaneObj.h"
+class KPlayer : public KPlaneObj
 {
+public:
+    bool  Init();
+    bool  Frame();
+    bool  Render();
+    bool  Release();
 };
 

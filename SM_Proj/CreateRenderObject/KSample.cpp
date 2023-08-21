@@ -30,8 +30,14 @@ bool  KSample::Init()
     m_pMapObj->SetScale(Vector3(g_fMapSizeX, g_fMapSizeY, 1.0f));
     m_pMapObj->Create(m_textureMgr, textname[0], m_shaderMgr, L"Plane.hlsl");
 
+    m_pPlayer = new KPlayer;
+    m_pPlayer->Set(m_pDevice, m_pImmediateContext);
+    m_pPlayer->SetPosition({ 0.0f, 0.0f, 0.0f });
+    m_pPlayer->SetScale(Vector3(100.0f, 100.0f, 1.0f));
+    m_pPlayer->Create(m_textureMgr, textname[1], m_shaderMgr, L"Plane.hlsl");
 
-    m_MainCamera.Create(m_pMapObj->m_vPosition,
+
+    m_MainCamera.Create(m_pPlayer->m_vPosition,
         { (float)m_dwWindowWidth, (float)m_dwWindowHeight });
 
     for (int i = 0; i < 5; i++) {
@@ -50,6 +56,7 @@ bool  KSample::Init()
 }
 bool  KSample::Frame()
 {
+    m_pPlayer->Frame();
     m_pMapObj->Frame();
     for (auto obj : m_ObjList) {
         obj->Move(g_fSecondPerFrame);
@@ -61,13 +68,16 @@ bool  KSample::Render()
 {
     m_pImmediateContext->OMSetBlendState(m_AlphaBlend, 0, -1);
 
-    m_MainCamera.m_vCameraPos = m_pMapObj->m_vPosition;
+    m_MainCamera.m_vCameraPos = m_pPlayer->m_vPosition;
     m_pMapObj->SetMatrix(nullptr, &m_MainCamera.m_mtxView, &m_MainCamera.m_mtxOrthoProjection);
     m_pMapObj->Render();
     for (auto obj : m_ObjList) {
         obj->SetMatrix(nullptr, &m_MainCamera.m_mtxView, &m_MainCamera.m_mtxOrthoProjection);
         obj->Render();
     }
+    m_pPlayer->SetMatrix(nullptr, &m_MainCamera.m_mtxView,
+        &m_MainCamera.m_mtxOrthoProjection);
+    m_pPlayer->Render();
     return true;
 }
 bool  KSample::Release()
@@ -75,6 +85,9 @@ bool  KSample::Release()
     m_pMapObj->Release();
     delete m_pMapObj;
     m_pMapObj = nullptr;
+    m_pPlayer->Release();
+    delete m_pPlayer;
+    m_pPlayer = nullptr;
     for (auto obj : m_ObjList) {
         obj->Release();
         delete obj;

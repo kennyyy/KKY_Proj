@@ -1,6 +1,5 @@
 #pragma once
 #include "KObject.h"
-#include"KInput.h"
 class KPlaneObj : public KObject
 {
 public:

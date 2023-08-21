@@ -63,26 +63,9 @@ bool KPlaneObj::CreateIndexBuffer() {
 
 }
 bool KPlaneObj::Frame() {
-
-    if (KInput::GetInstance().m_dwKeyState['A'] > KEY_UP)
-    {
-        m_vPosition.x -= 500.0f * g_fSecondPerFrame;
-    }
-    if (KInput::GetInstance().m_dwKeyState['D'] > KEY_UP)
-    {
-        m_vPosition.x += 500.0f * g_fSecondPerFrame;
-    }
-    if (KInput::GetInstance().m_dwKeyState['W'] > KEY_UP)
-    {
-        m_vPosition.y += 500.0f * g_fSecondPerFrame;
-    }
-    if (KInput::GetInstance().m_dwKeyState['S'] > KEY_UP)
-    {
-        m_vPosition.y -= 500.0f * g_fSecondPerFrame;
-    }
  
     Matrix mtxScale, mtxRotation, mtxTranslate;
-    mtxScale.Sclae(m_vScale);
+    mtxScale.Scale(m_vScale);
     mtxRotation.ZRotate(m_vRotation.z);
     mtxTranslate.Translation(m_vPosition);
 
