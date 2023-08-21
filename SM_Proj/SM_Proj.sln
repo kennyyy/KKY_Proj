@@ -53,6 +53,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CreateTexture1", "CreateTex
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CreateTexture2", "CreateTexture2\CreateTexture2.vcxproj", "{22A4EAC5-EC25-4587-83C3-6246464815F5}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CreateRenderObject", "CreateRenderObject\CreateRenderObject.vcxproj", "{3DB13947-4835-41DF-8A5C-0F38345FF62C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -229,6 +231,14 @@ Global
 		{22A4EAC5-EC25-4587-83C3-6246464815F5}.Release|x64.Build.0 = Release|x64
 		{22A4EAC5-EC25-4587-83C3-6246464815F5}.Release|x86.ActiveCfg = Release|Win32
 		{22A4EAC5-EC25-4587-83C3-6246464815F5}.Release|x86.Build.0 = Release|Win32
+		{3DB13947-4835-41DF-8A5C-0F38345FF62C}.Debug|x64.ActiveCfg = Debug|x64
+		{3DB13947-4835-41DF-8A5C-0F38345FF62C}.Debug|x64.Build.0 = Debug|x64
+		{3DB13947-4835-41DF-8A5C-0F38345FF62C}.Debug|x86.ActiveCfg = Debug|Win32
+		{3DB13947-4835-41DF-8A5C-0F38345FF62C}.Debug|x86.Build.0 = Debug|Win32
+		{3DB13947-4835-41DF-8A5C-0F38345FF62C}.Release|x64.ActiveCfg = Release|x64
+		{3DB13947-4835-41DF-8A5C-0F38345FF62C}.Release|x64.Build.0 = Release|x64
+		{3DB13947-4835-41DF-8A5C-0F38345FF62C}.Release|x86.ActiveCfg = Release|Win32
+		{3DB13947-4835-41DF-8A5C-0F38345FF62C}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

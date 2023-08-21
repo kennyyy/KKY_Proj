@@ -1,0 +1,159 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="WIC">
+      <UniqueIdentifier>{e30dea3b-e644-494d-a326-20433fa3d8d3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core">
+      <UniqueIdentifier>{7ddd1349-6f2b-44ab-bd19-34a187ef8c14}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Manager">
+      <UniqueIdentifier>{7c4d5552-3499-415c-b514-af1b72129d97}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object">
+      <UniqueIdentifier>{2e1f4b4e-954a-4d36-ad93-4e8bfc89837e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Renderer">
+      <UniqueIdentifier>{365fd3f5-4bfb-4080-8ce1-7ca00874f1f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shader">
+      <UniqueIdentifier>{9814c3b7-e95b-4615-93af-b36924f88014}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Utils">
+      <UniqueIdentifier>{56e0951d-e016-418e-8a22-b74f2bbc33a0}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="WIC\DDS.h">
+      <Filter>WIC</Filter>
+    </ClInclude>
+    <ClInclude Include="WIC\DDSTextureLoader.h">
+      <Filter>WIC</Filter>
+    </ClInclude>
+    <ClInclude Include="WIC\DirectXHelpers.h">
+      <Filter>WIC</Filter>
+    </ClInclude>
+    <ClInclude Include="WIC\LoaderHelpers.h">
+      <Filter>WIC</Filter>
+    </ClInclude>
+    <ClInclude Include="WIC\pch.h">
+      <Filter>WIC</Filter>
+    </ClInclude>
+    <ClInclude Include="WIC\PlatformHelpers.h">
+      <Filter>WIC</Filter>
+    </ClInclude>
+    <ClInclude Include="WIC\ScreenGrab.h">
+      <Filter>WIC</Filter>
+    </ClInclude>
+    <ClInclude Include="WIC\WICTextureLoader.h">
+      <Filter>WIC</Filter>
+    </ClInclude>
+    <ClInclude Include="KCore.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="KDevice.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="KStd.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="KWindow.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="KObject.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="KPlaneObj.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="KShaderMgr.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="KTextureMgr.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="KMath.h">
+      <Filter>Core\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="KTimer.h">
+      <Filter>Core\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="KUtils.h">
+      <Filter>Core\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="KSample.h" />
+    <ClInclude Include="KDxObject.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="KNpcObj.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="KCamera.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="KInput.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="KPlayer.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="KSample.cpp" />
+    <ClCompile Include="WIC\DDSTextureLoader.cpp">
+      <Filter>WIC</Filter>
+    </ClCompile>
+    <ClCompile Include="WIC\ScreenGrab.cpp">
+      <Filter>WIC</Filter>
+    </ClCompile>
+    <ClCompile Include="WIC\WICTextureLoader.cpp">
+      <Filter>WIC</Filter>
+    </ClCompile>
+    <ClCompile Include="KCore.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="KDevice.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="KWindow.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="KObject.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="KPlaneObj.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="KTextureMgr.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="KShaderMgr.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="KMath.cpp">
+      <Filter>Core\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="KUtils.cpp">
+      <Filter>Core\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="KTimer.cpp">
+      <Filter>Core\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="KDxObject.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="KNpcObj.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="KCamera.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="KInput.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="KPlayer.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="Plane.hlsl">
+      <Filter>Shader</Filter>
+    </FxCompile>
+  </ItemGroup>
+</Project>

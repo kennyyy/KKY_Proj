@@ -1,0 +1,87 @@
+#include "KSample.h"
+
+
+bool  KSample::Init()
+{
+    D3D11_BLEND_DESC bdc;
+    ZeroMemory(&bdc, sizeof(bdc));
+    bdc.RenderTarget[0].BlendEnable = true;
+    bdc.RenderTarget[0].SrcBlend = D3D11_BLEND_SRC_ALPHA;
+    bdc.RenderTarget[0].DestBlend = D3D11_BLEND_INV_SRC_ALPHA;
+    bdc.RenderTarget[0].BlendOp = D3D11_BLEND_OP_ADD;
+
+    bdc.RenderTarget[0].SrcBlendAlpha = D3D11_BLEND_ONE;
+    bdc.RenderTarget[0].DestBlendAlpha = D3D11_BLEND_ZERO;
+    bdc.RenderTarget[0].BlendOpAlpha = D3D11_BLEND_OP_ADD;
+
+    bdc.RenderTarget[0].RenderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_ALL;
+    m_pDevice->CreateBlendState(&bdc, &m_AlphaBlend);
+
+
+    m_shaderMgr.Set(m_pDevice, m_pImmediateContext);
+    m_textureMgr.Set(m_pDevice, m_pImmediateContext);
+
+    std::wstring textname[] = { L"../../res/kgcabk.bmp", L"../../res/ade4.dds" , L"../../res/mapcontrol.png",  L"../../res/103.tga" };
+    
+    srand(time(NULL));
+    m_pMapObj = new KPlaneObj;
+    m_pMapObj->Set(m_pDevice, m_pImmediateContext);
+    m_pMapObj->SetPosition({ 0.0f, 0.0f, 0.0f });
+    m_pMapObj->SetScale(Vector3(g_fMapSizeX, g_fMapSizeY, 1.0f));
+    m_pMapObj->Create(m_textureMgr, textname[0], m_shaderMgr, L"Plane.hlsl");
+
+
+    m_MainCamera.Create(m_pMapObj->m_vPosition,
+        { (float)m_dwWindowWidth, (float)m_dwWindowHeight });
+
+    for (int i = 0; i < 5; i++) {
+        KObject* pNpcObj = new KNpcObj;
+        pNpcObj->Set(m_pDevice, m_pImmediateContext);
+        pNpcObj->SetPosition(Vector3(randstep(-g_fMapSizeX, +g_fMapSizeX),
+            randstep(-g_fMapSizeY, +g_fMapSizeY), 0));
+        pNpcObj->SetScale(Vector3(50.0f, 50.0f, 1.0f));
+        pNpcObj->SetDirection({ randstep(-1, +1), randstep(-1, +1), 0 });
+        pNpcObj->Create(m_textureMgr ,textname[i%4], m_shaderMgr, L"Plane.hlsl");
+        m_ObjList.push_back(pNpcObj);
+    }
+
+
+    return true;
+}
+bool  KSample::Frame()
+{
+    m_pMapObj->Frame();
+    for (auto obj : m_ObjList) {
+        obj->Move(g_fSecondPerFrame);
+        obj->Frame();
+    }
+    return true;
+}
+bool  KSample::Render()
+{
+    m_pImmediateContext->OMSetBlendState(m_AlphaBlend, 0, -1);
+
+    m_MainCamera.m_vCameraPos = m_pMapObj->m_vPosition;
+    m_pMapObj->SetMatrix(nullptr, &m_MainCamera.m_mtxView, &m_MainCamera.m_mtxOrthoProjection);
+    m_pMapObj->Render();
+    for (auto obj : m_ObjList) {
+        obj->SetMatrix(nullptr, &m_MainCamera.m_mtxView, &m_MainCamera.m_mtxOrthoProjection);
+        obj->Render();
+    }
+    return true;
+}
+bool  KSample::Release()
+{
+    m_pMapObj->Release();
+    delete m_pMapObj;
+    m_pMapObj = nullptr;
+    for (auto obj : m_ObjList) {
+        obj->Release();
+        delete obj;
+    }
+    m_ObjList.clear();
+    m_AlphaBlend->Release();
+    return true;
+}
+
+KGAME(L"kgca", 800, 600)
