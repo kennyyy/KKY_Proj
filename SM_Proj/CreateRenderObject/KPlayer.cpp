@@ -20,27 +20,26 @@ bool KPlayer::Frame()
         m_vPosition.y -= 500.0f * g_fSecondPerFrame;
     }
 
-    float fHalfWidth = g_fMapSizeX / 2.0f;
-    float fHalfHeight = g_fMapSizeY / 2.0f;
     float fSizeHalfWidth = m_vScale.x;
     float fSizeHalfHeight = m_vScale.y;
-    if (m_vPosition.x < -fHalfWidth + fSizeHalfWidth)
+    if (m_vPosition.x < -g_fMapSizeX + fSizeHalfWidth)
     {
-        m_vPosition.x = -fHalfWidth + fSizeHalfWidth;
+        m_vPosition.x = -g_fMapSizeX + fSizeHalfWidth;
     }
-    if (m_vPosition.y < -fHalfHeight + fSizeHalfHeight)
+    if (m_vPosition.y < -g_fMapSizeY + fSizeHalfHeight)
     {
-        m_vPosition.y = -fHalfHeight + fSizeHalfHeight;
+        m_vPosition.y = -g_fMapSizeY + fSizeHalfHeight;
     }
-    if (m_vPosition.x > fHalfWidth - fSizeHalfWidth)
+    if (m_vPosition.x > g_fMapSizeX - fSizeHalfWidth)
     {
-        m_vPosition.x = fHalfWidth - fSizeHalfWidth;
+        m_vPosition.x = g_fMapSizeX - fSizeHalfWidth;
     }
-    if (m_vPosition.y > fHalfHeight - fSizeHalfHeight)
+    if (m_vPosition.y > g_fMapSizeY - fSizeHalfHeight)
     {
-        m_vPosition.y = fHalfHeight - fSizeHalfHeight;
+        m_vPosition.y = g_fMapSizeY - fSizeHalfHeight;
     }
-
+    Vector2 rt = { m_vPosition.x, m_vPosition.y };
+    SetRect(rt, m_vScale.x * 2.0f, m_vScale.y * 2.0f);
     Matrix mtxScale, mtxRotation, mtxTranslate;
     mtxScale.Scale(m_vScale);
     mtxRotation.ZRotate(m_vRotation.z);

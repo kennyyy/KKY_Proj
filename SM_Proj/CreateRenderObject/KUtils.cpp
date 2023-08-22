@@ -27,12 +27,12 @@ bool Rect::operator != (Rect& p)
 Rect Rect::operator + (Rect& p)
 {
     Rect rt;
-    float fMinX = min(v.x, p.v.x);
-    float fMinY = min(v.y, p.v.y);
-    float fMaxX = max(m_Point[2].x, p.m_Point[2].x);
-    float fMaxY = max(m_Point[2].y, p.m_Point[2].y);
-    Vector2 pos = { fMinX, fMinY };
-    rt.Set(pos, fMaxX - fMinX, fMaxY - fMinY);
+    float fMinX = min(m_Min.x, p.m_Min.x);
+    float fMinY = min(m_Min.y, p.m_Min.y);
+    float fMaxX = max(m_Max.x, p.m_Max.x);
+    float fMaxY = max(m_Max.y, p.m_Max.y);
+    Vector2 centerPos = { (fMinX + fMaxX) * 0.5f , (fMinY + fMaxY) * 0.5f };
+    rt.Set(centerPos, fMaxX - fMinX, fMaxY - fMinY);
     return rt;
 }
 Rect Rect::operator - (Rect& p)
@@ -43,11 +43,12 @@ Rect Rect::operator - (Rect& p)
     {
         //left, top          right
         //      bottom
-        float fx = (m_Min.x > p.m_Min.x) ? m_Min.x : p.m_Min.x;
-        float fy = (m_Min.y > p.m_Min.y) ? m_Min.y : p.m_Min.y;
-        float right = (m_Max.x < p.m_Max.x) ? m_Max.x : p.m_Max.x;
-        float bottom = (m_Max.y < p.m_Max.y) ? m_Max.y : p.m_Max.y;
-        rt.Set(fx, fy, right - fx, bottom - fy);
+        float fMinX = (m_Min.x > p.m_Min.x) ? m_Min.x : p.m_Min.x;
+        float fMinY = (m_Min.y > p.m_Min.y) ? m_Min.y : p.m_Min.y;
+        float fMaxX = (m_Max.x < p.m_Max.x) ? m_Max.x : p.m_Max.x;
+        float fMaxY = (m_Max.y < p.m_Max.y) ? m_Max.y : p.m_Max.y;
+        Vector2 centerPos = { (fMinX + fMaxX) * 0.5f , (fMinY + fMaxY) * 0.5f };
+        rt.Set(centerPos, fMaxX - fMinX, fMaxY - fMinY);
         rt.m_bEnable = true;
     }
     return rt;
@@ -80,6 +81,7 @@ Rect Rect::operator / (float fValue)
 }
 void Rect::Set(Vector2 p)
 {
+    m_Center = p;
     v = { p.x, p.y };
     s = { m_fWidth, m_fHeight };
     Set(m_fWidth, m_fHeight);
@@ -89,22 +91,24 @@ void Rect::Set(float fw, float fh)
     m_fWidth = fw;
     m_fHeight = fh;
     m_Half = { m_fWidth * 0.5f,m_fHeight * 0.5f };
-    m_Point[0] = { v.x, v.y };
-    m_Point[1] = { v.x + m_fWidth, v.y };
-    m_Point[2] = { v.x + m_fWidth, v.y + m_fHeight };
-    m_Point[3] = { v.x, v.y + m_fHeight };
-    m_Center = (m_Point[0] + m_Point[2]) * 0.5f;
-    m_Min = m_Point[0];
-    m_Max = m_Point[2];
+    m_Point[0] = { v.x - m_Half.x, v.y + m_Half.y };
+    m_Point[1] = { v.x + m_Half.x, v.y + m_Half.y };
+    m_Point[2] = { v.x + m_Half.x, v.y - m_Half.y };
+    m_Point[3] = { v.x - m_Half.x, v.y - m_Half.y };
+    m_Min = m_Point[3];
+    m_Max = m_Point[1];
 }
 void Rect::Set(Vector2 p, float fw, float fh)
 {
+    m_Center = p;
     v = p;
     s = { fw, fh };
     Set(fw, fh);
 }
 void Rect::Set(float fx, float fy, float fw, float fh)
 {
+    m_Center.x = fx;
+    m_Center.y = fy;
     v = { fx, fy };
     s = { fw, fh };
     Set(fw, fh);

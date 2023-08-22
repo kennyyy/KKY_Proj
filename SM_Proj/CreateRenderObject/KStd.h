@@ -20,8 +20,8 @@
 //#include "./WIC/WICTextureLoader.h" // 기타
 //#include "./WIC/DDSTextureLoader.h" // DDS 전용
 
-static float g_fMapSizeX = 2000.0f;
-static float g_fMapSizeY = 2000.0f;
+static float g_fMapSizeX = 1000.0f;
+static float g_fMapSizeY = 1000.0f;
 
 
 #define T_PI (3.141592f)

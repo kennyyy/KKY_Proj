@@ -1,5 +1,7 @@
 #include "KObject.h"
-
+void KObject::SetRect(Vector2& p, float w, float h) {
+    m_rt.Set(p, w, h);
+}
 
 void  KObject::SetPosition(Vector3 p) {
     m_vPosition = p;

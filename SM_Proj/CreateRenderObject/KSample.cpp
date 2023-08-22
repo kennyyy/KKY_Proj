@@ -33,7 +33,9 @@ bool  KSample::Init()
     m_pPlayer = new KPlayer;
     m_pPlayer->Set(m_pDevice, m_pImmediateContext);
     m_pPlayer->SetPosition({ 0.0f, 0.0f, 0.0f });
-    m_pPlayer->SetScale(Vector3(100.0f, 100.0f, 1.0f));
+    m_pPlayer->SetScale(Vector3(30.0f, 30.0f, 1.0f));
+    Vector2 rt_pos = { m_pPlayer->m_vPosition.x ,m_pPlayer->m_vPosition.y };
+    m_pPlayer->SetRect(rt_pos, m_pPlayer->m_vScale.x * 2.0f, m_pPlayer->m_vScale.y * 2.0f);
     m_pPlayer->Create(m_textureMgr, textname[1], m_shaderMgr, L"Plane.hlsl");
 
 
@@ -47,6 +49,8 @@ bool  KSample::Init()
             randstep(-g_fMapSizeY, +g_fMapSizeY), 0));
         pNpcObj->SetScale(Vector3(50.0f, 50.0f, 1.0f));
         pNpcObj->SetDirection({ randstep(-1, +1), randstep(-1, +1), 0 });
+        Vector2 rt_pos = { pNpcObj->m_vPosition.x ,pNpcObj->m_vPosition.y };
+        pNpcObj->SetRect(rt_pos, pNpcObj->m_vScale.x * 2.0f, pNpcObj->m_vScale.y * 2.0f);
         pNpcObj->Create(m_textureMgr ,textname[i%4], m_shaderMgr, L"Plane.hlsl");
         m_ObjList.push_back(pNpcObj);
     }
@@ -59,8 +63,18 @@ bool  KSample::Frame()
     m_pPlayer->Frame();
     m_pMapObj->Frame();
     for (auto obj : m_ObjList) {
-        obj->Move(g_fSecondPerFrame);
-        obj->Frame();
+        if (obj->m_bDead == false) {
+            obj->Move(g_fSecondPerFrame);
+            obj->Frame();
+        }
+   
+     
+    }
+    for (auto obj : m_ObjList) {
+        if (m_pPlayer->m_rt.ToRect(obj->m_rt))
+        {
+            obj->m_bDead = true;
+        }
     }
     return true;
 }
@@ -72,8 +86,11 @@ bool  KSample::Render()
     m_pMapObj->SetMatrix(nullptr, &m_MainCamera.m_mtxView, &m_MainCamera.m_mtxOrthoProjection);
     m_pMapObj->Render();
     for (auto obj : m_ObjList) {
-        obj->SetMatrix(nullptr, &m_MainCamera.m_mtxView, &m_MainCamera.m_mtxOrthoProjection);
-        obj->Render();
+        if (obj->m_bDead == false)
+        {
+            obj->SetMatrix(nullptr, &m_MainCamera.m_mtxView, &m_MainCamera.m_mtxOrthoProjection);
+            obj->Render();
+        }
     }
     m_pPlayer->SetMatrix(nullptr, &m_MainCamera.m_mtxView,
         &m_MainCamera.m_mtxOrthoProjection);

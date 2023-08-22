@@ -9,23 +9,26 @@ void KNpcObj::Move(float fSecond) {
 	//Vector3 vVelocity = mDirection * mfSpeed * fSecond;
 	Vector3 vVelocity = m_vDirection * 500.0f * fSecond;
 	m_vPosition = m_vPosition + vVelocity;
+	 
 	
-	if (m_vPosition.x < -1000.0f) {
+	if (m_vPosition.x < -(g_fMapSizeX ) + (m_vScale.x / 2.0f)) {
 		m_vDirection.x *= -1.0f;
-		m_vPosition.x = -1000.0f;
+		m_vPosition.x = -(g_fMapSizeX )+ (m_vScale.x / 2.0f);
 	}
-	if (m_vPosition.x > 1000.0f) {
+	if (m_vPosition.x > (g_fMapSizeX ) - (m_vScale.x / 2.0f)) {
 		m_vDirection.x *= -1.0f;
-		m_vPosition.x = 1000.0f;
+		m_vPosition.x = (g_fMapSizeX ) - (m_vScale.x / 2.0f);
 	}
-	if (m_vPosition.y < -1000.0f) {
+	if (m_vPosition.y < -(g_fMapSizeY) + (m_vScale.y/ 2.0f)) {
 		m_vDirection.y *= -1.0f;
-		m_vPosition.y = -1000.0f;
+		m_vPosition.y = -(g_fMapSizeY ) + (m_vScale.y / 2.0f);
 	}
-	if (m_vPosition.y > 1000.0f) {
+	if (m_vPosition.y > (g_fMapSizeY ) - (m_vScale.y / 2.0f)) {
 		m_vDirection.y *= -1.0f;
-		m_vPosition.y = 1000.0f;
+		m_vPosition.y = (g_fMapSizeY) - (m_vScale.y / 2.0f);
 	}
+	Vector2 rt = { m_vPosition.x, m_vPosition.y };
+	SetRect(rt, m_vScale.x * 2.0f, m_vScale.y * 2.0f);
 }
 bool KNpcObj::Frame() {
 	Matrix mtxScale, mtxRotation, mtxTranslate;

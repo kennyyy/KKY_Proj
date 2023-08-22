@@ -13,17 +13,17 @@ bool  KCamera::Frame() {
 	float fHalfWidth = m_dwWindowWidth / 2.0f;
 	float fHalfHeight = m_dwWindowHeight / 2.0f;
 
-	if (m_vCameraPos.x < -(g_fMapSizeX / 2.0f)+fHalfWidth) {
-		m_vCameraPos.x = -(g_fMapSizeX / 2.0f)+fHalfWidth;
+	if (m_vCameraPos.x < -(g_fMapSizeX )+fHalfWidth) {
+		m_vCameraPos.x = -(g_fMapSizeX )+fHalfWidth;
 	}
-	if (m_vCameraPos.x > (g_fMapSizeX / 2.0f) - fHalfWidth) {
-		m_vCameraPos.x = (g_fMapSizeX  / 2.0f) - fHalfWidth;
+	if (m_vCameraPos.x > (g_fMapSizeX ) - fHalfWidth) {
+		m_vCameraPos.x = (g_fMapSizeX ) - fHalfWidth;
 	}
-	if (m_vCameraPos.y < -(g_fMapSizeY / 2.0f) + fHalfHeight) {
-		m_vCameraPos.y = -(g_fMapSizeY / 2.0f) + fHalfHeight;
+	if (m_vCameraPos.y < -(g_fMapSizeY ) + fHalfHeight) {
+		m_vCameraPos.y = -(g_fMapSizeY) + fHalfHeight;
 	}
-	if (m_vCameraPos.y > (g_fMapSizeY / 2.0f) - fHalfHeight) {
-		m_vCameraPos.y = (g_fMapSizeY / 2.0f) - fHalfHeight;
+	if (m_vCameraPos.y > (g_fMapSizeY ) - fHalfHeight) {
+		m_vCameraPos.y = (g_fMapSizeY ) - fHalfHeight;
 	}
 
 	//뷰 좌표를 원점으로 만들기위해 이동한 카메라 포지션만큼 -해줘야 한다.

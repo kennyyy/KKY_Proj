@@ -75,9 +75,6 @@
     <ClInclude Include="KMath.h">
       <Filter>Core\Utils</Filter>
     </ClInclude>
-    <ClInclude Include="KTimer.h">
-      <Filter>Core\Utils</Filter>
-    </ClInclude>
     <ClInclude Include="KUtils.h">
       <Filter>Core\Utils</Filter>
     </ClInclude>
@@ -94,7 +91,12 @@
     <ClInclude Include="KInput.h">
       <Filter>Core</Filter>
     </ClInclude>
-    <ClInclude Include="KPlayer.h" />
+    <ClInclude Include="KTimer.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="KPlayer.h">
+      <Filter>Object</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="KSample.cpp" />
@@ -134,9 +136,6 @@
     <ClCompile Include="KUtils.cpp">
       <Filter>Core\Utils</Filter>
     </ClCompile>
-    <ClCompile Include="KTimer.cpp">
-      <Filter>Core\Utils</Filter>
-    </ClCompile>
     <ClCompile Include="KDxObject.cpp">
       <Filter>Renderer</Filter>
     </ClCompile>
@@ -149,7 +148,12 @@
     <ClCompile Include="KInput.cpp">
       <Filter>Core</Filter>
     </ClCompile>
-    <ClCompile Include="KPlayer.cpp" />
+    <ClCompile Include="KTimer.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="KPlayer.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Plane.hlsl">
