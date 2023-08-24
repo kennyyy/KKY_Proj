@@ -42,19 +42,20 @@ bool  KSample::Init()
     m_MainCamera.Create(m_pPlayer->m_vPosition,
         { (float)m_dwWindowWidth, (float)m_dwWindowHeight });
 
-    for (int i = 0; i < 5; i++) {
+    srand(time(NULL));
+    for (int i = 0; i < 30; i++) {
         KObject* pNpcObj = new KNpcObj;
         pNpcObj->Set(m_pDevice, m_pImmediateContext);
         pNpcObj->SetPosition(Vector3(randstep(-g_fMapSizeX, +g_fMapSizeX),
             randstep(-g_fMapSizeY, +g_fMapSizeY), 0));
         pNpcObj->SetScale(Vector3(50.0f, 50.0f, 1.0f));
-        pNpcObj->SetDirection({ randstep(-1, +1), randstep(-1, +1), 0 });
+        pNpcObj->SetDirection({ randstep(-1.0f, 1.0f),
+            randstep(-1.0f, 1.0f), 0 });
         Vector2 rt_pos = { pNpcObj->m_vPosition.x ,pNpcObj->m_vPosition.y };
         pNpcObj->SetRect(rt_pos, pNpcObj->m_vScale.x * 2.0f, pNpcObj->m_vScale.y * 2.0f);
-        pNpcObj->Create(m_textureMgr ,textname[i%4], m_shaderMgr, L"Plane.hlsl");
+        pNpcObj->Create(m_textureMgr, textname[i % 4], m_shaderMgr, L"Plane.hlsl");
         m_ObjList.push_back(pNpcObj);
     }
-
 
     return true;
 }
@@ -62,20 +63,22 @@ bool  KSample::Frame()
 {
     m_pPlayer->Frame();
     m_pMapObj->Frame();
+
     for (auto obj : m_ObjList) {
         if (obj->m_bDead == false) {
-            if (g_fGameTimer > 10.0f) {
-                obj->SetDirection({ m_pPlayer->m_vPosition.x - obj->m_vPosition.x,m_pPlayer->m_vPosition.y - obj->m_vPosition.y , 0 });
+            if (g_fGameTimer > 3.0f) {
+                obj->SetDirection({ m_pPlayer->m_vPosition.x - obj->m_vPosition.x, m_pPlayer->m_vPosition.y - obj->m_vPosition.y, 0 });
             }
-            srand(time(NULL));
             if (fmodf(g_fGameTimer, 2.0f) < 0.001f) {
-                obj->SetDirection({ randstep(-1, +1), randstep(-1, +1), 0 });
+                obj->SetDirection({ randstep(-1.0f, 1.0f),
+            randstep(-1.0f, 1.0f), 0 });
             }
             obj->Move(g_fSecondPerFrame);
             obj->Frame();
+
         }
-   
-     
+
+
     }
     for (auto obj : m_ObjList) {
         if (m_pPlayer->m_rt.ToRect(obj->m_rt))
@@ -122,3 +125,7 @@ bool  KSample::Release()
 }
 
 KGAME(L"kgca", 800, 600)
+
+#include "KSample.h"
+
+
