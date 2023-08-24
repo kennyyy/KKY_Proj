@@ -22,7 +22,8 @@
 
 extern float g_fMapSizeX ;
 extern float g_fMapSizeY ;
-
+extern DWORD g_dwWindowWidth;
+extern DWORD g_dwWindowHeight;
 
 #define T_PI (3.141592f)
 #define T_EPSILON ( 0.0001f)

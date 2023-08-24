@@ -64,6 +64,13 @@ bool  KSample::Frame()
     m_pMapObj->Frame();
     for (auto obj : m_ObjList) {
         if (obj->m_bDead == false) {
+            if (g_fGameTimer > 10.0f) {
+                obj->SetDirection({ m_pPlayer->m_vPosition.x - obj->m_vPosition.x,m_pPlayer->m_vPosition.y - obj->m_vPosition.y , 0 });
+            }
+            srand(time(NULL));
+            if (fmodf(g_fGameTimer, 2.0f) < 0.001f) {
+                obj->SetDirection({ randstep(-1, +1), randstep(-1, +1), 0 });
+            }
             obj->Move(g_fSecondPerFrame);
             obj->Frame();
         }

@@ -1,7 +1,8 @@
 #include "KNpcObj.h"
 
 void KNpcObj::SetDirection(Vector3 d) {
-	m_vDirection = d - m_vPosition;
+	/*m_vDirection = d - m_vPosition;*/
+	m_vDirection = d;
 	float fDistance = m_vDirection.Length();
 	m_vDirection /= fDistance;
 }
