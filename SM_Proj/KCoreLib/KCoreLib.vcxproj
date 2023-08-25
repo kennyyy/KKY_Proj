@@ -154,6 +154,7 @@ copy "..\\..\\output\\DEBUG\\KCoreLib.lib" "..\\..\\CoreLib\\lib"</Command>
     <ClCompile Include="KCore.cpp" />
     <ClCompile Include="KDevice.cpp" />
     <ClCompile Include="KDxObject.cpp" />
+    <ClCompile Include="KDXWrite.cpp" />
     <ClCompile Include="KInput.cpp" />
     <ClCompile Include="KMath.cpp" />
     <ClCompile Include="KNpcObj.cpp" />
@@ -171,6 +172,7 @@ copy "..\\..\\output\\DEBUG\\KCoreLib.lib" "..\\..\\CoreLib\\lib"</Command>
     <ClInclude Include="KCore.h" />
     <ClInclude Include="KDevice.h" />
     <ClInclude Include="KDxObject.h" />
+    <ClInclude Include="KDXWrite.h" />
     <ClInclude Include="KInput.h" />
     <ClInclude Include="KMath.h" />
     <ClInclude Include="KNpcObj.h" />

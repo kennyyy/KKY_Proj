@@ -22,6 +22,7 @@ bool  KCore::EngineFrame()
     KInput::GetInstance().Frame();
     m_MainCamera.Frame();
     KDevice::Frame();
+
     Frame();
     return true;
 }

@@ -23,7 +23,7 @@ bool  KSample::Init()
  
     hr = m_pSwapChain->GetBuffer(0, __uuidof(IDXGISurface1), (LPVOID*)&pSurface1);
     if (SUCCEEDED(hr)) {
-        m_font.CreateFactoryAndCreateTextFormat();
+        m_font.CreateFactoryAndCreateTextFormat(L"°íµñ", 50, L"ko-kr");
         m_font.CreateDeviceResources(pSurface1);
             if (pSurface1) pSurface1->Release();
           

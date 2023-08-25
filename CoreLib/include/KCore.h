@@ -5,6 +5,7 @@
 #include "KTimer.h"
 #include "KShaderMgr.h"
 #include "KTextureMgr.h"
+#include "KDXWrite.h"
 
 class KCore : public KDevice
 {
