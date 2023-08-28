@@ -40,7 +40,11 @@ public:
 	bool Render();
 	bool PostRender();
 	bool Release();
-
+	static KDXWrite& GetInstance() {
+		static KDXWrite dxwrite;
+		return dxwrite;
+	}
 	KDXWrite() {};
 };
+
 

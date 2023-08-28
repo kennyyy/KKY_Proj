@@ -118,12 +118,12 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>../../CoreLib/include;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../CoreLib/include;../../fmod/inc;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>../../CoreLib/lib;</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>../../CoreLib/lib;../../fmod/lib/x64;</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -149,9 +149,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="KSample.cpp" />
+    <ClCompile Include="KSoundMgr.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="KSample.h" />
+    <ClInclude Include="KSoundMgr.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

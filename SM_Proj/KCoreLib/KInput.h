@@ -29,3 +29,4 @@ public:
 	~KInput() {}
 };
 
+#define I_Input KInput::GetInstance()

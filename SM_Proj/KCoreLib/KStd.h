@@ -4,8 +4,11 @@
 #include <string>
 #include <vector>
 #include <memory>
-
+#include <codecvt>
 #include <map>
+#include <unordered_map> 
+#include <queue>
+
 
 #include <d3d11.h>
 #include <dxgi.h>
@@ -16,14 +19,39 @@
 #pragma comment (lib, "d3d11.lib") // d3d11.dll
 #pragma comment (lib, "d3dcompiler.lib") // d3d11.dll
 #pragma comment (lib, "DirectXTex.lib")
+#pragma comment (lib, "KCoreLib.lib")
 
 //#include "./WIC/WICTextureLoader.h" // 기타
 //#include "./WIC/DDSTextureLoader.h" // DDS 전용
 
-extern float g_fMapSizeX ;
-extern float g_fMapSizeY ;
-extern DWORD g_dwWindowWidth;
-extern DWORD g_dwWindowHeight;
+typedef std::basic_string<TCHAR>			T_STR;
+typedef std::basic_string<wchar_t>			W_STR;
+typedef std::basic_string<char>				C_STR;
+typedef std::vector<T_STR>					T_STR_VECTOR;
+typedef std::basic_string<TCHAR>::iterator		T_ITOR;
+typedef std::basic_string<wchar_t>::iterator	W_ITOR;
+typedef std::basic_string<char>::iterator	C_ITOR;
+typedef std::vector<T_STR>				T_ARRAY_ITOR;
+typedef std::vector<DWORD>				DWORD_VECTOR;
+typedef	std::vector< DWORD >::iterator	DWORD_VECTOR_ITOR;
+typedef std::list<DWORD>				DWORD_LIST;
+typedef std::list<DWORD>::iterator		DWORD_LIST_ITOR;
+typedef std::list< HANDLE >				HANDLE_LIST;
+typedef	std::list< HANDLE >::iterator	HANDLE_LIST_ITOR;
+
+
+
+static std::wstring mtw(std::string str)
+{
+	std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> conv;
+	return conv.from_bytes(str);
+}
+
+static std::string wtm(std::wstring str)
+{
+	std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> conv;
+	return conv.to_bytes(str);
+}
 
 #define T_PI (3.141592f)
 #define T_EPSILON ( 0.0001f)
@@ -42,6 +70,11 @@ extern DWORD g_dwWindowHeight;
 extern HWND g_hWnd;
 extern float	 g_fGameTimer;
 extern float	 g_fSecondPerFrame;
+
+extern float g_fMapSizeX;
+extern float g_fMapSizeY;
+extern DWORD g_dwWindowWidth;
+extern DWORD g_dwWindowHeight;
 
 static void K_DebugString(const WCHAR* msg)
 {

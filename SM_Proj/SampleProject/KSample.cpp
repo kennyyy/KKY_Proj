@@ -28,11 +28,44 @@ bool  KSample::Init()
     m_pWrite2->AddText(L"±è°æ¿¬", 400.0f, 0, 800.0f, 300.0f,{ 0.0f, 0.0f, 0.0f, 1.0f });
     m_pWrite2->AddText(L"±è°æ¿¬", 600.0f,0, 800.0f, 300.0f, { 0.0f, 0.0f, 0.0f, 1.0f });
 
+
+
+    m_pBGS =I_Sound.LoadSound(L"../../data/sound/MyLove.mp3");
+    m_pBGS->VolumeSet(0.5f);
+    m_pBGS->Play();
+
+    m_pEffectS= I_Sound.LoadSound(L"../../data/sound/Gun1.wav");
+    m_pEffectS->PlayEffect();
     return true;
 }
 bool  KSample::Frame()
 {
-   
+    I_Sound.Frame();
+    if (I_Input.m_dwKeyState[VK_LBUTTON]
+        == KEY_PUSH)
+    {
+        m_pEffectS->PlayEffect();
+    }
+    if (I_Input.m_dwKeyState[VK_RBUTTON]
+        == KEY_PUSH)
+    {
+        m_pBGS->Stop();
+    }
+    if (I_Input.m_dwKeyState[VK_HOME]
+        == KEY_PUSH)
+    {
+        m_pBGS->Paused();
+    }
+    if (I_Input.m_dwKeyState[VK_LEFT]
+        == KEY_HOLD)
+    {
+        m_pBGS->VolumeDown();
+    }
+    if (I_Input.m_dwKeyState[VK_RIGHT]
+        == KEY_HOLD)
+    {
+        m_pBGS->VolumeUp();
+    }
     m_pMapObj->Frame();
     m_pWrite->Frame();
     m_pWrite2->Frame();
