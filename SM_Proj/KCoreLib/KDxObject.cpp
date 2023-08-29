@@ -55,8 +55,7 @@ bool  KDxObject::Frame()
 {
     return true;
 }
-bool  KDxObject::Render()
-{
+bool KDxObject::PreRender() {
     m_pImmediateContext->VSSetConstantBuffers(0, 1, &m_pConstantBuffer);
     m_pImmediateContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
     m_pImmediateContext->IASetInputLayout(m_pVertexLayout);
@@ -66,6 +65,15 @@ bool  KDxObject::Render()
     m_pImmediateContext->IASetIndexBuffer(m_pIndexBuffer, DXGI_FORMAT_R16_UINT, 0);
     m_pTex->Apply(m_pImmediateContext, 0);
     m_pShader->Apply(m_pImmediateContext);
+    return true;
+}
+bool  KDxObject::Render()
+{
+    PreRender();
+    PostRender();
+    return true;
+}
+bool KDxObject::PostRender() {
     m_pImmediateContext->DrawIndexed(6, 0, 0);
     // m_pImmediateContext->Draw(6, 0);
     return true;

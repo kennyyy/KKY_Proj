@@ -28,7 +28,7 @@ bool  KSample::Init()
     m_pMapObj->Set(m_pDevice, m_pImmediateContext);
     m_pMapObj->SetPosition({ 0.0f, 0.0f, 0.0f });
     m_pMapObj->SetScale(Vector3(g_fMapSizeX, g_fMapSizeY, 1.0f));
-    m_pMapObj->Create(m_textureMgr, textname[0], m_shaderMgr, L"Plane.hlsl");
+    m_pMapObj->Create(m_textureMgr, textname[0], m_shaderMgr, L"Forest01.pngl");
 
     m_pPlayer = new KPlayer;
     m_pPlayer->Set(m_pDevice, m_pImmediateContext);

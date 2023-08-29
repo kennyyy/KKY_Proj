@@ -1,5 +1,10 @@
 #pragma once
 #include "KMath.h"
+struct UVRect
+{
+    Vector2 m_Min;
+    Vector2 m_Max;
+};
 struct Rect 
 {
     bool  m_bEnable = true;

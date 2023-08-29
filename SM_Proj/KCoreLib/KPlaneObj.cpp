@@ -1,4 +1,17 @@
 #include "KPlaneObj.h"
+bool  KPlaneObj::Load(
+    ID3D11Device* pDevice,
+    ID3D11DeviceContext* pContext,
+    Vector3 p,
+    Vector3 s,
+    W_STR texFile, W_STR shaderFile)
+{
+    Set(pDevice, pContext);
+    SetPosition(p);
+    SetScale(s);
+    return Create(texFile, shaderFile);
+}
+
 bool KPlaneObj::CreateVertexBuffer() {
     m_VertexList.resize(4);
     m_VertexList[0].t.x = 0.0f;   m_VertexList[0].t.y = 0.0f;

@@ -3,17 +3,50 @@
 
 bool  KSample::Init()
 {
-    std::wstring textname[] = { L"../../res/kgcabk.bmp", L"../../res/ade4.dds" , L"../../res/mapcontrol.png",  L"../../res/103.tga" };
+    D3D11_BLEND_DESC bdc;
+    ZeroMemory(&bdc, sizeof(bdc));
+    bdc.RenderTarget[0].BlendEnable = true;
+    bdc.RenderTarget[0].SrcBlend = D3D11_BLEND_SRC_ALPHA;
+    bdc.RenderTarget[0].DestBlend = D3D11_BLEND_INV_SRC_ALPHA;
+    
+    bdc.RenderTarget[0].SrcBlendAlpha = D3D11_BLEND_ONE;
+    bdc.RenderTarget[0].DestBlendAlpha = D3D11_BLEND_ZERO;
+
+    bdc.RenderTarget[0].BlendOpAlpha = D3D11_BLEND_OP_ADD;
+    bdc.RenderTarget[0].BlendOp = D3D11_BLEND_OP_ADD;
+    bdc.RenderTarget[0].RenderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_ALL;
+    m_pDevice->CreateBlendState(&bdc, &m_AlphaBlend);
+
+    std::wstring textname[] = { L"../../res/Forest01.png", L"../../res/ade4.dds" , L"../../res/mapcontrol.png",  L"../../res/103.tga" };
     
     srand(time(NULL));
     m_pMapObj = new KPlaneObj;
     m_pMapObj->Set(m_pDevice, m_pImmediateContext);
     m_pMapObj->SetPosition({ 0.0f, 0.0f, 0.0f });
     m_pMapObj->SetScale(Vector3(m_dwWindowWidth/2.0f, m_dwWindowHeight/2.0f, 1.0f));
-    m_pMapObj->Create( textname[0], L"../../res/shader/Plane.hlsl");
+    m_pMapObj->Create(L"../../res/City.png", L"../../res/shader/Plane.hlsl");
 
     m_MainCamera.Create({0,0,0},
         { (float)m_dwWindowWidth, (float)m_dwWindowHeight });
+
+    m_pSpriteTexObj = std::make_unique<KSpriteTexture>();
+    SpriteInfo sInfo;
+    sInfo.pos = { 0.0f,0.0f ,0.0f };
+    sInfo.scale = { 50.0f, 50.0f, 1.0f };
+    sInfo.iAniTickTime = 6.0f;
+    sInfo.texFileName = L"../../res/ui/0.png";
+    sInfo.texList.push_back(L"../../res/ui/0.png");
+    sInfo.texList.push_back(L"../../res/ui/1.png");
+    sInfo.texList.push_back(L"../../res/ui/2.png");
+    sInfo.texList.push_back(L"../../res/ui/3.png");
+    sInfo.texList.push_back(L"../../res/ui/4.png");
+    sInfo.texList.push_back(L"../../res/ui/5.png");
+
+    sInfo.shaderFIleName = L"../../res/shader/Plane.hlsl";
+    m_pSpriteTexObj->Load(m_pDevice, m_pImmediateContext, sInfo);
+    m_SpriteList.insert(std::make_pair(m_iSpriteIndex++, m_pSpriteTexObj.get()));
+    
+
 
     m_pWrite = new KDXWrite;
     m_pWrite->Set(m_pSwapChain);
@@ -67,15 +100,18 @@ bool  KSample::Frame()
         m_pBGS->VolumeUp();
     }
     m_pMapObj->Frame();
+    m_pSpriteTexObj->Frame();
     m_pWrite->Frame();
     m_pWrite2->Frame();
     return true;
 }
 bool  KSample::Render()
 {
-    
+    m_pImmediateContext->OMSetBlendState(m_AlphaBlend, 0, -1);
     m_pMapObj->SetMatrix(nullptr, &m_MainCamera.m_mtxView, &m_MainCamera.m_mtxOrthoProjection);
     m_pMapObj->Render();
+    m_pSpriteTexObj->SetMatrix(nullptr, &m_MainCamera.m_mtxView, &m_MainCamera.m_mtxOrthoProjection);
+    m_pSpriteTexObj->Render();
     m_pWrite->Render();
     m_pWrite2->Render();
 

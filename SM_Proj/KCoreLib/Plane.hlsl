@@ -27,6 +27,7 @@ VS_OUT VS(VS_IN vin)
 }
 
 Texture2D g_txDiffuse1 : register(t0);
+Texture2D g_txDiffuseMask1 : register(t1);
 SamplerState sample0 : register(s0);
 
 struct PS_IN {
@@ -34,7 +35,9 @@ struct PS_IN {
 	float2 t : TEXTURE;
 };
 
-float4 PS(PS_IN vin) : SV_Target
+float4 PS(PS_IN vIn) : SV_Target
 {
-	return g_txDiffuse1.Sample(sample0, vin.t);
+    float4 color = g_txDiffuse1.Sample(sample0, vIn.t);
+    color.a = 1.0f - g_txDiffuseMask1.Sample(sample0, vIn.t).r;
+    return color;
 }

@@ -6,13 +6,17 @@ void  KShader::Apply(ID3D11DeviceContext* pImmediateContext)  const {
 }
 bool KShader::LoadVertexShader(ID3D11Device* pDevice, std::wstring filename) {
     ID3DBlob* ErrorCode;
+    UINT flags = 0;
+    #ifdef _DEBUG
+    flags = D3DCOMPILE_DEBUG;
+    #endif
     HRESULT hr = D3DCompileFromFile(
         filename.c_str(),
         nullptr,
         nullptr,
         "VS",
         "vs_5_0",
-        0,
+        flags,
         0,
         &m_VertexShaderCode,
         &ErrorCode);
@@ -38,13 +42,17 @@ bool KShader::LoadVertexShader(ID3D11Device* pDevice, std::wstring filename) {
 bool KShader::LoadPixelShader(ID3D11Device* pDevice, std::wstring filename) {
     ID3DBlob* ErrorCode;
     ID3DBlob* m_PixelShaderCode;
+    UINT flags = 0;
+#ifdef _DEBUG
+   flags = D3DCOMPILE_DEBUG;
+#endif
     HRESULT hr = D3DCompileFromFile(
         filename.c_str(),
         nullptr,
         nullptr,
         "PS",
         "ps_5_0",
-        0,
+        flags,
         0,
         &m_PixelShaderCode,
         &ErrorCode);

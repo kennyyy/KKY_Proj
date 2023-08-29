@@ -150,10 +150,12 @@
   <ItemGroup>
     <ClCompile Include="KSample.cpp" />
     <ClCompile Include="KSoundMgr.cpp" />
+    <ClCompile Include="KSpriteObj.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="KSample.h" />
     <ClInclude Include="KSoundMgr.h" />
+    <ClInclude Include="KSpriteObj.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
